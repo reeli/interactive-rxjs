@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "jsx": "react",
+    "strict": true,
+    "alwaysStrict": true,
+    "pretty": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "baseUrl": ".",
+    "outDir": ".tmp",
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "paths": {
+      "*": ["*", "types/*"] // * -> *  表示先找文件自身对应的 types，如果找不到然后再去 types/* 下面找
+    }
+  },
+  "exclude": ["node_modules"]
+}
