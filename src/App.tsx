@@ -1,6 +1,7 @@
 import React from "react";
 import { css, Global } from "@emotion/core";
 import { SubscribeDemo } from "src/examples/SubscribeDemo";
+import { CompleteDemo } from "src/examples/CompleteDemo";
 
 export const App = () => {
   return (
@@ -16,7 +17,10 @@ export const App = () => {
           }
         `}
       />
-      <SubscribeDemo />
+      <div css={{ display: "flex" }}>
+        <SubscribeDemo />
+        <CompleteDemo />
+      </div>
     </div>
   );
 };
