@@ -64,6 +64,7 @@ export const CompleteDemo = () => {
 
   return (
     <div css={{ width: 200 }}>
+      <h2>Complete</h2>
       <DemoHeader>
         <Button
           onClick={() => {
@@ -118,7 +119,7 @@ export const CompleteDemo = () => {
       </svg>
       <DemoFooter>
         {completed && !reset && (
-          <div>Complete, Observable 已完结，表示「没有更多数据了」，之后也不会再向 Observer 推送数据</div>
+          <div>Observable 已完结，表示「没有更多数据了」，之后也不会再向 Observer 推送数据</div>
         )}
       </DemoFooter>
     </div>
