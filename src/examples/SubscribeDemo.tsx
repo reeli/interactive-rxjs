@@ -3,13 +3,14 @@ import React, { useState } from "react";
 import { COLORS } from "src/style";
 import { DemoFooter, DemoHeader } from "src/components/Demo";
 import { Button } from "src/components/Button";
+import { isNull } from "lodash";
 
 const ALine = animated(({ style }) => (
   <line x1={100} x2={100} y1={style.y1} y2={style.y2} stroke={COLORS.GREEN} strokeWidth={2} />
 ));
 
 export const SubscribeDemo = () => {
-  const [toggle, setToggle] = useState(false);
+  const [toggle, setToggle] = useState<boolean | null>(null);
   const props = useSpring({
     from: {
       y1: 250,
@@ -59,7 +60,9 @@ export const SubscribeDemo = () => {
           </text>
         </g>
       </svg>
-      <DemoFooter />
+      <DemoFooter>
+        {isNull(toggle) ? null : toggle ? <div>已订阅，现在可以向观察者推送数据了</div> : <div>已取消订阅</div>}
+      </DemoFooter>
     </div>
   );
 };
