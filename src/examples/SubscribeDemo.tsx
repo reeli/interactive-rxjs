@@ -1,13 +1,10 @@
-import { animated, useSpring } from "react-spring";
+import { useSpring } from "react-spring";
 import React, { useState } from "react";
 import { COLORS } from "src/style";
 import { DemoFooter, DemoHeader } from "src/components/Demo";
 import { Button } from "src/components/Button";
 import { isNull } from "lodash";
-
-const ALine = animated(({ style }) => (
-  <line x1={100} x2={100} y1={style.y1} y2={style.y2} stroke={COLORS.GREEN} strokeWidth={2} />
-));
+import { AnimatedLine } from "src/components/AnimatedLine";
 
 export const SubscribeDemo = () => {
   const [toggle, setToggle] = useState<boolean | null>(null);
@@ -36,7 +33,7 @@ export const SubscribeDemo = () => {
         </Button>
       </DemoHeader>
       <svg width={"100%"} height={"100%"} viewBox={"0 0 200 300"}>
-        <ALine style={props} />
+        <AnimatedLine style={props} stroke={COLORS.GREEN} />
         <g>
           <rect x={0} y={0} width={200} height={50} fill={COLORS.OBSERVABLE} />
           <text x={100} y={25} css={{ fontSize: "1.4rem" }} textAnchor={"middle"}>

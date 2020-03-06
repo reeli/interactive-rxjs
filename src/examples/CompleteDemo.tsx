@@ -1,73 +1,12 @@
 import React, { useState } from "react";
-import { Spring } from "react-spring/renderprops-universal";
-import { map } from "lodash";
 import { COLORS } from "src/style";
 import { DemoFooter, DemoHeader } from "src/components/Demo";
 import { Button } from "src/components/Button";
-import { animated, useSpring } from "react-spring";
+import { useSpring } from "react-spring";
+import { AnimatedCircles } from "src/components/AnimatedCircles";
+import { AnimatedLine } from "src/components/AnimatedLine";
 
 const data = ["1", "2", "3"];
-
-const calcFromY = (completed: boolean, itemY: number) => {
-  if (completed) {
-    return itemY;
-  }
-  return 16;
-};
-
-const calcToY = (started: boolean, itemY: number) => {
-  if (started) {
-    return itemY;
-  }
-  return 16;
-};
-
-const CircleSequence: React.FC<{
-  completed: boolean;
-  started: boolean;
-  onReset?: () => void;
-}> = ({ completed, started, onReset }) => (
-  <>
-    {map(data, (text, i) => {
-      const itemY = 220 - i * 30;
-      return (
-        <Spring
-          from={{ y: calcFromY(completed, itemY) }}
-          to={{
-            y: calcToY(started, itemY),
-          }}
-          delay={i * 800}
-          key={i}
-          onRest={() => {
-            if (i === data.length - 1) {
-              onReset && onReset();
-            }
-          }}
-        >
-          {styles => (
-            <g transform={`translate(100, ${styles.y})`}>
-              <circle cx="0" cy="0" r="15" fill={COLORS.WHITE} strokeWidth={2} stroke={COLORS.BLACK} />
-              <text x={0} y={6} css={{ fontSize: "2rem" }} textAnchor={"middle"}>
-                {text}
-              </text>
-            </g>
-          )}
-        </Spring>
-      );
-    })}
-  </>
-);
-
-const ALine = animated(({ style, reset, completed }) => (
-  <line
-    x1={100}
-    x2={100}
-    y1={style.y1}
-    y2={style.y2}
-    stroke={completed && !reset ? COLORS.GREY : COLORS.GREEN}
-    strokeWidth={2}
-  />
-));
 
 export const CompleteDemo = () => {
   const [completed, setCompleted] = useState(false);
@@ -98,7 +37,6 @@ export const CompleteDemo = () => {
         {!subscribed && (
           <Button
             onClick={() => {
-              // setReset(false);
               setSubscribed(true);
             }}
             css={{ color: COLORS.BLUE }}
@@ -120,10 +58,10 @@ export const CompleteDemo = () => {
         </Button>
       </DemoHeader>
       <svg width={"100%"} height={"100%"} viewBox={"0 0 200 300"}>
-        <ALine reset={reset} completed={completed} style={props} />
-        <line />
+        <AnimatedLine stroke={completed && !reset ? COLORS.GREY : COLORS.GREEN} style={props} />
         {reset ? null : (
-          <CircleSequence
+          <AnimatedCircles
+            data={data}
             completed={completed}
             started={started}
             onReset={() => {
