@@ -2,6 +2,7 @@ import { animated, useSpring } from "react-spring";
 import React, { useState } from "react";
 import { COLORS } from "src/style";
 import { DemoFooter, DemoHeader } from "src/components/Demo";
+import { Button } from "src/components/Button";
 
 const ALine = animated(({ style }) => (
   <line x1={100} x2={100} y1={style.y1} y2={style.y2} stroke={COLORS.GREEN} strokeWidth={2} />
@@ -22,7 +23,17 @@ export const SubscribeDemo = () => {
 
   return (
     <div css={{ width: 200 }}>
-      <DemoHeader />
+      <h2>Subscribe and Unsubscribe</h2>
+      <DemoHeader>
+        <Button
+          onClick={() => {
+            setToggle(!toggle);
+          }}
+          css={{ color: COLORS.BLUE }}
+        >
+          {toggle ? "取消订阅 unsubscribe" : "订阅 subscribe"}
+        </Button>
+      </DemoHeader>
       <svg width={"100%"} height={"100%"} viewBox={"0 0 200 300"}>
         <ALine style={props} />
         <g>
