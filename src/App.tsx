@@ -3,6 +3,7 @@ import { css, Global } from "@emotion/core";
 import { SubscribeDemo } from "src/examples/SubscribeDemo";
 import { CompleteDemo } from "src/examples/CompleteDemo";
 import { DemoWrapper } from "src/components/Demo";
+import { ErrorDemo } from "src/examples/ErrorDemo";
 
 export const App = () => {
   return (
@@ -24,6 +25,9 @@ export const App = () => {
         </DemoWrapper>
         <DemoWrapper>
           <CompleteDemo />
+        </DemoWrapper>
+        <DemoWrapper>
+          <ErrorDemo />
         </DemoWrapper>
       </div>
     </div>
