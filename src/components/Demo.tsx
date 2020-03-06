@@ -6,4 +6,4 @@ export const DemoHeader: React.FC = ({ children }) => <div css={{ height: 50 }}>
 
 export const DemoFooter: React.FC = ({ children }) => <div css={{ height: 100 }}>{children}</div>;
 
-export const DemoTitle: React.FC = ({ children }) =>       <h2>{children}</h2>;
+export const DemoTitle: React.FC = ({ children }) => <p css={{ fontSize: "1.6rem" }}>{children}</p>;
