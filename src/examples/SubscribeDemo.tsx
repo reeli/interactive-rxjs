@@ -1,56 +1,54 @@
-import {animated, useSpring} from "react-spring";
-import React, {useState} from "react";
-import {css} from "@emotion/core";
-import {COLORS} from "src/style";
+import { animated, useSpring } from "react-spring";
+import React, { useState } from "react";
+import { COLORS } from "src/style";
+import { DemoFooter, DemoHeader } from "src/components/Demo";
 
-const rectStyles = css({
-  background: COLORS.GREEN,
-  width: "100%",
-  height: 50,
-  color: COLORS.BLACK,
-  margin: "0 16px",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  padding: 8,
-  borderRadius: 4,
-});
-
-const lineStyles = css({
-  borderLeft: `2px solid ${COLORS.GREEN}`,
-  width: 2,
-  height: 100,
-  position: "absolute",
-  top: "66px",
-});
-
-const containerStyles = css({
-  width: 200,
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  position: "relative",
-  marginRight: 20,
-});
+const ALine = animated(({ style }) => (
+  <line x1={100} x2={100} y1={style.y1} y2={style.y2} stroke={COLORS.GREEN} strokeWidth={2} />
+));
 
 export const SubscribeDemo = () => {
   const [toggle, setToggle] = useState(false);
-  const props = useSpring({ height: toggle ? 100 : 0 });
+  const props = useSpring({
+    from: {
+      y1: 250,
+      y2: toggle ? 50 : 250,
+    },
+    to: {
+      y1: 250,
+      y2: toggle ? 50 : 250,
+    },
+  });
 
   return (
-    <div css={[containerStyles, { transform: "rotate(180deg)" }]}>
-      <div css={[rectStyles, { background: COLORS.OBSERVER }]}>
-        <div css={{ transform: "rotate(180deg)" }}>
-          <div>观察者 Observer</div>
-          <button onClick={() => setToggle(!toggle)} css={{ marginTop: 5, width: 80 }}>
+    <div css={{ width: 200 }}>
+      <DemoHeader />
+      <svg width={"100%"} height={"100%"} viewBox={"0 0 200 300"}>
+        <ALine style={props} />
+        <g>
+          <rect x={0} y={0} width={200} height={50} fill={COLORS.OBSERVABLE} />
+          <text x={100} y={25} css={{ fontSize: "1.4rem" }} textAnchor={"middle"}>
+            可被观察的对象 Observable
+          </text>
+        </g>
+        <g>
+          <rect x={0} y={250} width={200} height={50} fill={COLORS.OBSERVER} />
+          <text x={100} y={275} css={{ fontSize: "1.4rem" }} textAnchor={"middle"}>
+            观察者 Observer
+          </text>
+          <text
+            x={100}
+            y={293}
+            css={{ fontSize: "1.4rem", cursor: "pointer" }}
+            textAnchor={"middle"}
+            onClick={() => setToggle(!toggle)}
+            fill={COLORS.BLUE}
+          >
             {toggle ? "取消订阅 unsubscribe" : "订阅 subscribe"}
-          </button>
-        </div>
-      </div>
-      <animated.div css={[lineStyles]} style={props} />
-      <div css={[rectStyles, { background: COLORS.OBSERVABLE, marginTop: 100 }]}>
-        <div css={{ transform: "rotate(180deg)" }}>可被观察对象 Observable</div>
-      </div>
+          </text>
+        </g>
+      </svg>
+      <DemoFooter />
     </div>
   );
 };
