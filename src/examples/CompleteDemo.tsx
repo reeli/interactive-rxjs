@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { COLORS } from "src/style";
-import { DemoFooter, DemoHeader } from "src/components/Demo";
+import {DemoFooter, DemoHeader, DemoTitle} from "src/components/Demo";
 import { Button } from "src/components/Button";
 import { useSpring } from "react-spring";
 import { AnimatedCircles } from "src/components/AnimatedCircles";
@@ -34,7 +34,7 @@ export const CompleteDemo = () => {
 
   return (
     <div css={{ width: 200 }}>
-      <h2>Complete</h2>
+      <DemoTitle>Complete</DemoTitle>
       <DemoHeader>
         {!subscribed && (
           <Button

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { COLORS } from "src/style";
-import { DemoFooter, DemoHeader } from "src/components/Demo";
+import {DemoFooter, DemoHeader, DemoTitle} from "src/components/Demo";
 import { Button } from "src/components/Button";
 import { AnimatedCircles } from "src/components/AnimatedCircles";
 import { ObservableRect } from "src/components/ObservableRect";
@@ -15,7 +15,7 @@ export const ErrorDemo = () => {
 
   return (
     <div css={{ width: 200 }}>
-      <h2>Error</h2>
+      <DemoTitle>Error</DemoTitle>
       <DemoHeader>
         <Button
           onClick={() => {

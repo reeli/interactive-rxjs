@@ -1,7 +1,7 @@
 import { useSpring } from "react-spring";
 import React, { useState } from "react";
 import { COLORS } from "src/style";
-import { DemoFooter, DemoHeader } from "src/components/Demo";
+import { DemoFooter, DemoHeader, DemoTitle } from "src/components/Demo";
 import { Button } from "src/components/Button";
 import { isNull } from "lodash";
 import { AnimatedLine } from "src/components/AnimatedLine";
@@ -23,7 +23,7 @@ export const SubscribeDemo = () => {
 
   return (
     <div css={{ width: 200 }}>
-      <h2>Subscribe and Unsubscribe</h2>
+      <DemoTitle>Subscribe and Unsubscribe</DemoTitle>
       <DemoHeader>
         <Button
           onClick={() => {
