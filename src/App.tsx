@@ -2,6 +2,7 @@ import React from "react";
 import { css, Global } from "@emotion/core";
 import { SubscribeDemo } from "src/examples/SubscribeDemo";
 import { CompleteDemo } from "src/examples/CompleteDemo";
+import { DemoWrapper } from "src/components/Demo";
 
 export const App = () => {
   return (
@@ -17,9 +18,13 @@ export const App = () => {
           }
         `}
       />
-      <div css={{ display: "flex" }}>
-        <SubscribeDemo />
-        <CompleteDemo />
+      <div css={{ display: "flex", alignItems: "flex-end" }}>
+        <DemoWrapper>
+          <SubscribeDemo />
+        </DemoWrapper>
+        <DemoWrapper>
+          <CompleteDemo />
+        </DemoWrapper>
       </div>
     </div>
   );
