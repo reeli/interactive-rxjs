@@ -3,6 +3,8 @@ import { COLORS } from "src/style";
 import { DemoFooter, DemoHeader } from "src/components/Demo";
 import { Button } from "src/components/Button";
 import { AnimatedCircles } from "src/components/AnimatedCircles";
+import { ObservableRect } from "src/components/ObservableRect";
+import { ObserverRect } from "src/components/ObserverRect";
 
 const data = ["1", "2"];
 
@@ -54,18 +56,8 @@ export const ErrorDemo = () => {
             }}
           />
         )}
-        <g>
-          <rect x={0} y={0} width={200} height={50} fill={COLORS.OBSERVABLE} />
-          <text x={100} y={25} css={{ fontSize: "1.4rem" }} textAnchor={"middle"}>
-            可被观察的对象 Observable
-          </text>
-        </g>
-        <g>
-          <rect x={0} y={250} width={200} height={50} fill={COLORS.OBSERVER} />
-          <text x={100} y={275} css={{ fontSize: "1.4rem" }} textAnchor={"middle"}>
-            观察者 Observer
-          </text>
-        </g>
+        <ObservableRect />
+        <ObserverRect />
       </svg>
       <DemoFooter>{completed && !reset && <div>出错了！</div>}</DemoFooter>
     </div>

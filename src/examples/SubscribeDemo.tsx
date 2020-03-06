@@ -5,6 +5,8 @@ import { DemoFooter, DemoHeader } from "src/components/Demo";
 import { Button } from "src/components/Button";
 import { isNull } from "lodash";
 import { AnimatedLine } from "src/components/AnimatedLine";
+import { ObservableRect } from "src/components/ObservableRect";
+import { ObserverRect } from "src/components/ObserverRect";
 
 export const SubscribeDemo = () => {
   const [toggle, setToggle] = useState<boolean | null>(null);
@@ -34,17 +36,8 @@ export const SubscribeDemo = () => {
       </DemoHeader>
       <svg width={"100%"} height={"100%"} viewBox={"0 0 200 300"}>
         <AnimatedLine style={props} stroke={COLORS.GREEN} />
-        <g>
-          <rect x={0} y={0} width={200} height={50} fill={COLORS.OBSERVABLE} />
-          <text x={100} y={25} css={{ fontSize: "1.4rem" }} textAnchor={"middle"}>
-            可被观察的对象 Observable
-          </text>
-        </g>
-        <g>
-          <rect x={0} y={250} width={200} height={50} fill={COLORS.OBSERVER} />
-          <text x={100} y={275} css={{ fontSize: "1.4rem" }} textAnchor={"middle"}>
-            观察者 Observer
-          </text>
+        <ObservableRect />
+        <ObserverRect>
           <text
             x={100}
             y={293}
@@ -55,7 +48,7 @@ export const SubscribeDemo = () => {
           >
             {toggle ? "取消订阅 unsubscribe" : "订阅 subscribe"}
           </text>
-        </g>
+        </ObserverRect>
       </svg>
       <DemoFooter>
         {isNull(toggle) ? null : toggle ? <div>已订阅，现在可以向观察者推送数据了</div> : <div>已取消订阅</div>}
