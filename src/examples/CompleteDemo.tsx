@@ -4,6 +4,7 @@ import { map } from "lodash";
 import { COLORS } from "src/style";
 import { DemoFooter, DemoHeader } from "src/components/Demo";
 import { Button } from "src/components/Button";
+import { animated, useSpring } from "react-spring";
 
 const data = ["1", "2", "3"];
 
@@ -35,7 +36,7 @@ const CircleSequence: React.FC<{
           to={{
             y: calcToY(started, itemY),
           }}
-          delay={i * 1000}
+          delay={i * 800}
           key={i}
           onRest={() => {
             if (i === data.length - 1) {
@@ -57,29 +58,61 @@ const CircleSequence: React.FC<{
   </>
 );
 
+const ALine = animated(({ style, reset, completed }) => (
+  <line
+    x1={100}
+    x2={100}
+    y1={style.y1}
+    y2={style.y2}
+    stroke={completed && !reset ? COLORS.GREY : COLORS.GREEN}
+    strokeWidth={2}
+  />
+));
+
 export const CompleteDemo = () => {
   const [completed, setCompleted] = useState(false);
   const [started, setStarted] = useState(false);
+  const [subscribed, setSubscribed] = useState(false);
   const [reset, setReset] = useState(false);
+  const props = useSpring({
+    from: {
+      y1: 250,
+      y2: subscribed ? 50 : 250,
+    },
+    to: {
+      y1: 250,
+      y2: subscribed ? 50 : 250,
+    },
+    onRest: () => {
+      if (subscribed) {
+        setReset(false);
+        setStarted(true);
+      }
+    },
+  });
 
   return (
     <div css={{ width: 200 }}>
       <h2>Complete</h2>
       <DemoHeader>
-        <Button
-          onClick={() => {
-            setReset(false);
-            setStarted(true);
-          }}
-          css={{ color: COLORS.BLUE }}
-        >
-          开始动画
-        </Button>
+        {!subscribed && (
+          <Button
+            onClick={() => {
+              // setReset(false);
+              setSubscribed(true);
+            }}
+            css={{ color: COLORS.BLUE }}
+          >
+            订阅
+          </Button>
+        )}
+
         <Button
           onClick={() => {
             setReset(true);
             setCompleted(false);
             setStarted(false);
+            setSubscribed(false);
           }}
           css={{ marginLeft: 5 }}
         >
@@ -87,14 +120,8 @@ export const CompleteDemo = () => {
         </Button>
       </DemoHeader>
       <svg width={"100%"} height={"100%"} viewBox={"0 0 200 300"}>
-        <line
-          x1={100}
-          x2={100}
-          y1={50}
-          y2={250}
-          stroke={completed && !reset ? COLORS.GREY : COLORS.GREEN}
-          strokeWidth={2}
-        />
+        <ALine reset={reset} completed={completed} style={props} />
+        <line />
         {reset ? null : (
           <CircleSequence
             completed={completed}
@@ -118,9 +145,8 @@ export const CompleteDemo = () => {
         </g>
       </svg>
       <DemoFooter>
-        {completed && !reset && (
-          <div>Observable 已完结，表示「没有更多数据了」，之后也不会再向 Observer 推送数据</div>
-        )}
+        {subscribed && <div>已订阅，现在可以向观察者推送数据了</div>}
+        {completed && !reset && <div>Observable 已完结，表示「没有更多数据了」，之后也不会再向 Observer 推送数据</div>}
       </DemoFooter>
     </div>
   );
