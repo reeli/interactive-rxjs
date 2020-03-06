@@ -1,12 +1,13 @@
-import { animated, useSpring } from "react-spring";
-import React, { useState } from "react";
-import { css } from "@emotion/core";
+import {animated, useSpring} from "react-spring";
+import React, {useState} from "react";
+import {css} from "@emotion/core";
+import {COLORS} from "src/style";
 
 const rectStyles = css({
-  background: "green",
+  background: COLORS.GREEN,
   width: "100%",
   height: 50,
-  color: "#222",
+  color: COLORS.BLACK,
   margin: "0 16px",
   display: "flex",
   justifyContent: "center",
@@ -16,7 +17,7 @@ const rectStyles = css({
 });
 
 const lineStyles = css({
-  borderLeft: "2px solid rgb(130, 215, 54)",
+  borderLeft: `2px solid ${COLORS.GREEN}`,
   width: 2,
   height: 100,
   position: "absolute",
@@ -38,7 +39,7 @@ export const SubscribeDemo = () => {
 
   return (
     <div css={[containerStyles, { transform: "rotate(180deg)" }]}>
-      <div css={[rectStyles, { background: "#ccc" }]}>
+      <div css={[rectStyles, { background: COLORS.OBSERVER }]}>
         <div css={{ transform: "rotate(180deg)" }}>
           <div>观察者 Observer</div>
           <button onClick={() => setToggle(!toggle)} css={{ marginTop: 5, width: 80 }}>
@@ -47,7 +48,7 @@ export const SubscribeDemo = () => {
         </div>
       </div>
       <animated.div css={[lineStyles]} style={props} />
-      <div css={[rectStyles, { background: "rgb(255, 203, 70)", marginTop: 100 }]}>
+      <div css={[rectStyles, { background: COLORS.OBSERVABLE, marginTop: 100 }]}>
         <div css={{ transform: "rotate(180deg)" }}>可被观察对象 Observable</div>
       </div>
     </div>
