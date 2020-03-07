@@ -15,7 +15,7 @@ export const Rect: React.FC<IRectProps> = ({
   height = 50,
   x = 0,
   y = 0,
-  fill = COLORS.GREY,
+  fill = COLORS.PRIMARY,
   text = "",
   children,
 }) => (
