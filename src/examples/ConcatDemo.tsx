@@ -35,6 +35,7 @@ export const ConcatDemo = () => {
     const [isSource1RefComplete, setIsSource1RefComplete] = useState<boolean | null>(null);
     const [isSource2RefComplete, setIsSource2RefComplete] = useState<boolean | null>(null);
     const [startSource1, setStartSource1] = useState<boolean | null>(null);
+    const [startSource2, setStartSource2] = useState<boolean | null>(null);
 
     const concatRef = useRef<any>();
     const styleConcat = useAnimatedLine({
@@ -51,7 +52,6 @@ export const ConcatDemo = () => {
         started,
         elementRef: source1Ref,
         onReset: () => {
-            // setIsSource1RefComplete(true);
             setStartSource1(true);
         },
     });
@@ -63,30 +63,49 @@ export const ConcatDemo = () => {
         started: isSource1RefComplete,
         elementRef: source2Ref,
         onReset: () => {
-            setIsSource2RefComplete(true);
+            setStartSource2(true);
         },
     });
 
     useChain(started && !startSource1 ? [concatRef, source1Ref] : [source1Ref, concatRef], [0, 0.5, 1.2]);
     useChain([source2Ref], [0.5]);
 
-    const styles: any = useSpring({
+    const source1CircleStyles: any = useSpring({
         from: {x: 40, y: 15},
         to: async (next: any) => {
             if (isSource1RefComplete) {
-                await next({x: 100, y: 220});
+                await next({x: 100, y: 230});
             } else if (startSource1) {
                 await next({x: 40, y: 140, config: {duration: 1000}});
                 await next({x: 100, y: 140, config: {duration: 10}});
-                await next({x: 100, y: 220, config: {duration: 1000}});
+                await next({x: 100, y: 230, config: {duration: 1000}});
             } else {
                 await next({x: 40, y: 15});
             }
         },
         onRest: () => {
             if (!isNull(startSource1)) {
-                console.log("test")
                 setIsSource1RefComplete(true);
+            }
+        }
+    });
+
+    const source2CircleStyles: any = useSpring({
+        from: {x: 160, y: 15},
+        to: async (next: any) => {
+            if (isSource2RefComplete) {
+                await next({x: 100, y: 200});
+            } else if (startSource2) {
+                await next({x: 160, y: 140, config: {duration: 1000}});
+                await next({x: 100, y: 140, config: {duration: 10}});
+                await next({x: 100, y: 200, config: {duration: 1000}});
+            } else {
+                await next({x: 160, y: 15});
+            }
+        },
+        onRest: () => {
+            if (!isNull(startSource2)) {
+                setIsSource2RefComplete(true);
             }
         }
     });
@@ -108,6 +127,8 @@ export const ConcatDemo = () => {
                         setStarted(null);
                         setIsSource1RefComplete(null);
                         setIsSource2RefComplete(null);
+                        setStartSource1(null);
+                        setStartSource2(null);
                     }}
                     css={{marginLeft: 5}}
                 >
@@ -130,7 +151,8 @@ export const ConcatDemo = () => {
                     stroke={isSource2RefComplete ? COLORS.GREY : COLORS.GREEN}
                     style={styleSource2}
                 />
-                <Circle text={"1"} translateX={styles.x} translateY={styles.y}/>
+                <Circle text={"1"} translateX={source1CircleStyles.x} translateY={source1CircleStyles.y}/>
+                <Circle text={"2"} translateX={source2CircleStyles.x} translateY={source2CircleStyles.y}/>
                 <Rect width={80} height={40} text={"Source1$"}/>
                 <Rect width={80} height={40} x={120} text={"Source2$"}/>
                 <Rect width={200} height={40} y={120} text={"Concat$"}/>
