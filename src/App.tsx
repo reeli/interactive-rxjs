@@ -5,6 +5,7 @@ import {CompleteDemo} from "src/examples/CompleteDemo";
 import {DemoWrapper} from "src/components/Demo";
 import {ErrorDemo} from "src/examples/ErrorDemo";
 import {ConcatDemo} from "src/examples/ConcatDemo";
+import {FilterDemo} from "src/examples/FilterDemo";
 
 export const App = () => {
     return (
@@ -61,6 +62,22 @@ export const App = () => {
                     <DemoWrapper>
                         <div>合并数据流</div>
                         <ConcatDemo/>
+                        <div css={{width: 300}}>
+                            <code>
+                                {`import { concat, of } from "rxjs";
+                                    
+                                    const source1$ = of(["1"]);
+                                    const source2$ = of(["2"]);
+                                    const source$ = concat(source1$, source2$);
+                                    
+                                    source$.subscribe(console.log);
+                                    `}
+                            </code>
+                        </div>
+                    </DemoWrapper>
+                    <DemoWrapper>
+                        <div>过滤数据流</div>
+                        <FilterDemo/>
                     </DemoWrapper>
                 </section>
                 <section>
