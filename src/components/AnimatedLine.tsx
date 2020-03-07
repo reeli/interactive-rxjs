@@ -1,5 +1,5 @@
 import { animated, useSpring } from "react-spring";
-import React from "react";
+import React, { forwardRef, RefObject } from "react";
 import { isNull } from "lodash";
 
 export const AnimatedLine = animated(({ style, x1 = 100, x2 = 100, y1 = 100, strokeWidth = 2, ...otherProps }) => (
@@ -11,16 +11,21 @@ interface ISpringAnimatedLineProps extends React.SVGProps<SVGLineElement> {
   onReset?: () => void;
 }
 
-export const SpringAnimatedLine: React.FC<ISpringAnimatedLineProps> = ({
+export const useAnimatedLine = ({
   y1,
   y2,
-  x1,
-  x2,
-  onReset,
   started,
-  ...others
+  onReset,
+  elementRef,
+}: {
+  y1: number;
+  y2: number;
+  started: boolean | null;
+  onReset?: () => void;
+  elementRef: RefObject<any>;
 }) => {
-  const styles = useSpring({
+  return useSpring<any>({
+    ref: elementRef as any,
     from: {
       y1: y2,
       y2: started ? y1 : y2,
@@ -29,15 +34,37 @@ export const SpringAnimatedLine: React.FC<ISpringAnimatedLineProps> = ({
       y1: y2,
       y2: started ? y1 : y2,
     },
-    config: {
-      duration: 500,
-    },
     onRest: () => {
       if (!isNull(started)) {
         onReset && onReset();
       }
     },
   });
-
-  return <AnimatedLine x1={x1} x2={x2} y1={y1} y2={y2} {...others} style={styles} />;
 };
+
+export const SpringAnimatedLine = forwardRef<any, ISpringAnimatedLineProps>(
+  ({ y1, y2, x1, x2, onReset, started = true, ...others }, elementRef) => {
+    console.log(elementRef, started, "elele");
+    const styles = useSpring<any>({
+      ref: elementRef as any,
+      from: {
+        y1: y2,
+        y2: started ? y1 : y2,
+      },
+      to: {
+        y1: y2,
+        y2: started ? y1 : y2,
+      },
+      config: {
+        duration: 500,
+      },
+      onRest: () => {
+        if (!isNull(started)) {
+          onReset && onReset();
+        }
+      },
+    });
+
+    return <AnimatedLine x1={x1} x2={x2} y1={y1} y2={y2} {...others} style={styles} />;
+  },
+);
