@@ -28,6 +28,7 @@ const data = [1, 2, 3, 4, 5];
 
 export const FilterDemo = () => {
     const [started, setStarted] = useState<boolean | null>(null);
+    const [completed, setCompleted] = useState<boolean | null>(null);
 
     return (
         <div css={{width: 200}}>
@@ -44,6 +45,7 @@ export const FilterDemo = () => {
                 <Button
                     onClick={() => {
                         setStarted(null);
+                        setCompleted(null)
                     }}
                     css={{marginLeft: 5}}
                 >
@@ -51,8 +53,8 @@ export const FilterDemo = () => {
                 </Button>
             </DemoHeader>
             <svg width={"100%"} height={"100%"} viewBox={"0 0 200 300"}>
-                <AnimatedLine {...LINE_CONFIG.OBSERVER_TO_FILTER} stroke={COLORS.GREEN}/>
-                <AnimatedLine {...LINE_CONFIG.FILTER_TO_SOURCE} stroke={COLORS.GREEN}/>
+                <AnimatedLine {...LINE_CONFIG.OBSERVER_TO_FILTER} stroke={completed ? COLORS.GREY : COLORS.GREEN}/>
+                <AnimatedLine {...LINE_CONFIG.FILTER_TO_SOURCE} stroke={completed ? COLORS.GREY : COLORS.GREEN}/>
                 {map(data, (i) =>
                     (
                         <Spring
@@ -61,6 +63,11 @@ export const FilterDemo = () => {
                             delay={i * 800}
                             key={i}
                             config={{duration: 2000}}
+                            onRest={() => {
+                                if (i === data.length - 1) {
+                                    setCompleted(true)
+                                }
+                            }}
                         >
                             {styles => <Circle translateY={styles.y} text={i}/>}
                         </Spring>
