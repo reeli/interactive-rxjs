@@ -1,7 +1,7 @@
 import React from "react";
 import { map } from "lodash";
 import { Spring } from "react-spring/renderprops-universal";
-import { COLORS } from "src/style";
+import { Circle } from "src/components/Circle";
 
 const CIRCLE_CONFIG = {
   radius: 15,
@@ -31,21 +31,7 @@ export const AnimatedCircles: React.FC<{
             }
           }}
         >
-          {styles => (
-            <g transform={`translate(100, ${styles.y})`}>
-              <circle
-                cx="0"
-                cy="0"
-                r={CIRCLE_CONFIG.radius}
-                fill={COLORS.WHITE}
-                strokeWidth={CIRCLE_CONFIG.strokeWidth}
-                stroke={COLORS.BLACK}
-              />
-              <text x={0} y={CIRCLE_CONFIG.radius / 2} textAnchor={"middle"} css={{ fontSize: "2rem" }}>
-                {text}
-              </text>
-            </g>
-          )}
+          {styles => <Circle translateY={styles.y} text={text} />}
         </Spring>
       );
     })}
