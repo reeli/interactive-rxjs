@@ -44,7 +44,6 @@ export const useAnimatedLine = ({
 
 export const SpringAnimatedLine = forwardRef<any, ISpringAnimatedLineProps>(
   ({ y1, y2, x1, x2, onReset, started = true, ...others }, elementRef) => {
-    console.log(elementRef, started, "elele");
     const styles = useSpring<any>({
       ref: elementRef as any,
       from: {
