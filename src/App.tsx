@@ -6,6 +6,7 @@ import {DemoWrapper} from "src/components/Demo";
 import {ErrorDemo} from "src/examples/ErrorDemo";
 import {ConcatDemo} from "src/examples/ConcatDemo";
 import {FilterDemo} from "src/examples/FilterDemo";
+import {MapDemo} from "src/examples/MapDemo";
 
 export const App = () => {
     return (
@@ -78,6 +79,10 @@ export const App = () => {
                     <DemoWrapper>
                         <div>过滤数据流</div>
                         <FilterDemo/>
+                    </DemoWrapper>
+                    <DemoWrapper>
+                        <div>转化数据流</div>
+                        <MapDemo/>
                     </DemoWrapper>
                 </section>
                 <section>
