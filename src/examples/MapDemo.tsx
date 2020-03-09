@@ -37,6 +37,9 @@ let data2: any = {
 };
 
 // 利用动画随时在 render 的特性去获取变化的值，而不是通过 setState 的方式去修改 data 的值
+// TODO: 距离/duration 算出 duration 公式
+
+const calDuration = (s1: number, s2: number, d2: number) => Math.floor(s1 * (d2 / s2));
 
 export const MapDemo = () => {
     const [started, setStarted] = useState<boolean | null>(null);
@@ -50,17 +53,18 @@ export const MapDemo = () => {
             if (started) {
                 await next({y: 140});
                 data[i] = data2[i];
-                await next({y: 220 - i * 20});
+                await next({y: 220 - i * 10, config: {duration: calDuration(((220 - i * 10) - 140), 140, 1000)}});
             } else {
                 await next({y: 0});
             }
         },
+        delay: i * 500,
         config: {
-            duration: (i + 1) * 1000,
+            duration: 1000,
         },
         onRest: () => {
-            if (!isNull(started) && i === keys(data).length - 1) {
-                console.log(completed);
+            if (!isNull(started) && isNull(completed) && i === keys(data).length - 1) {
+                setCompleted(true);
             }
         }
     })));
@@ -80,6 +84,11 @@ export const MapDemo = () => {
                 <Button
                     onClick={() => {
                         setStarted(null);
+                        data= {
+                            "0": 1,
+                            "1": 2,
+                            "2": 3
+                        }
                         setCompleted(null)
                     }}
                     css={{marginLeft: 5}}
@@ -90,7 +99,7 @@ export const MapDemo = () => {
             <svg width={"100%"} height={"100%"} viewBox={"0 0 200 300"}>
                 <AnimatedLine {...LINE_CONFIG.OBSERVER_TO_FILTER} stroke={completed ? COLORS.GREY : COLORS.GREEN}/>
                 <AnimatedLine {...LINE_CONFIG.FILTER_TO_SOURCE} stroke={completed ? COLORS.GREY : COLORS.GREEN}/>
-                {map(springs, (style:any, i) => <Circle translateY={style.y} key={i} text={() => data[i]}
+                {map(springs, (style: any, i) => <Circle translateY={style.y} key={i} text={() => data[i]}
                 />)}
                 <Rect width={200} height={40} y={0} text={"Source$"}/>
                 <Rect width={200} height={40} y={120} text={"Concat$"}/>
