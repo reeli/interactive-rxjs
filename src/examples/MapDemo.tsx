@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useRef, useState} from "react";
 import {COLORS} from "src/style";
 import {DemoFooter, DemoHeader, DemoTitle} from "src/components/Demo";
 import {Button} from "src/components/Button";
@@ -24,7 +24,7 @@ const LINE_CONFIG = {
     },
 };
 
-let data: any = {
+let data1: any = {
     "0": 1,
     "1": 2,
     "2": 3
@@ -44,15 +44,16 @@ const calDuration = (s1: number, s2: number, d2: number) => Math.floor(s1 * (d2 
 export const MapDemo = () => {
     const [started, setStarted] = useState<boolean | null>(null);
     const [completed, setCompleted] = useState<boolean | null>(null);
+    const dataRef = useRef({...data1});
 
-    const springs = useSprings(keys(data).length, keys(data).map((_, i) => ({
+    const springs = useSprings(keys(dataRef.current).length, keys(dataRef.current).map((_, i) => ({
         from: {
             y: 0,
         },
         to: async (next: any) => {
             if (started) {
                 await next({y: 140});
-                data[i] = data2[i];
+                dataRef.current[i] = data2[i];
                 await next({y: 220 - i * 10, config: {duration: calDuration(((220 - i * 10) - 140), 140, 1000)}});
             } else {
                 await next({y: 0});
@@ -63,8 +64,8 @@ export const MapDemo = () => {
             duration: 1000,
         },
         onRest: () => {
-            if (!isNull(started) && isNull(completed) && i === keys(data).length - 1) {
-                setCompleted(true);
+            if (!isNull(started) && isNull(completed) && i === keys(dataRef.current).length - 1) {
+                // setCompleted(true);
             }
         }
     })));
@@ -84,12 +85,8 @@ export const MapDemo = () => {
                 <Button
                     onClick={() => {
                         setStarted(null);
-                        data= {
-                            "0": 1,
-                            "1": 2,
-                            "2": 3
-                        }
                         setCompleted(null)
+                        dataRef.current = {...data1};
                     }}
                     css={{marginLeft: 5}}
                 >
@@ -99,7 +96,7 @@ export const MapDemo = () => {
             <svg width={"100%"} height={"100%"} viewBox={"0 0 200 300"}>
                 <AnimatedLine {...LINE_CONFIG.OBSERVER_TO_FILTER} stroke={completed ? COLORS.GREY : COLORS.GREEN}/>
                 <AnimatedLine {...LINE_CONFIG.FILTER_TO_SOURCE} stroke={completed ? COLORS.GREY : COLORS.GREEN}/>
-                {map(springs, (style: any, i) => <Circle translateY={style.y} key={i} text={() => data[i]}
+                {map(springs, (style: any, i) => <Circle translateY={style.y} key={i} text={() => dataRef.current[i]}
                 />)}
                 <Rect width={200} height={40} y={0} text={"Source$"}/>
                 <Rect width={200} height={40} y={120} text={"Concat$"}/>
