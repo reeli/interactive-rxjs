@@ -1,7 +1,7 @@
 import React, {ReactElement, useEffect, useRef} from "react";
 import {highlightBlock} from "highlight.js";
 
-export const HighlightBlock: React.FC<{ children: ReactElement }> = ({children}) => {
+export const Highlight: React.FC<{ children: ReactElement }> = ({children}) => {
     const childrenRef = useRef<Node>();
 
     useEffect(() => {
@@ -13,4 +13,4 @@ export const HighlightBlock: React.FC<{ children: ReactElement }> = ({children})
     return React.cloneElement(children, {
         ref: childrenRef
     });
-}
+};

@@ -8,7 +8,7 @@ import {AnimatedLine, useAnimatedLine} from "src/components/AnimatedLine";
 import {useChain, useSpring} from "react-spring";
 import {Circle} from "src/components/Circle";
 import {isNull} from "lodash";
-import {HighlightBlock} from "src/components/HighlightBlock";
+import { Highlight } from "src/components/Highlight";
 
 const LINE_CONFIG = {
     OBSERVER_TO_CONCAT: {
@@ -163,7 +163,7 @@ export const ConcatDemo = () => {
                     </svg>
                 </div>
 
-                <HighlightBlock>
+                <Highlight>
                     <code css={{flex:1, height: 300, marginLeft: 25}}>
                         {`
                                         import { concat, of } from "rxjs";
@@ -175,7 +175,7 @@ export const ConcatDemo = () => {
                                         source$.subscribe(console.log);
                                     `}
                     </code>
-                </HighlightBlock>
+                </Highlight>
             </div>
             <DemoFooter/>
         </div>
