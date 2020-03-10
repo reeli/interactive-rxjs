@@ -23,6 +23,17 @@ const webpackConfig: webpack.Configuration = {
         test: /\.html$/,
         use: ["raw-loader"],
       },
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: "style-loader",
+          },
+          {
+            loader: "css-loader",
+          },
+        ],
+      },
     ],
   },
   plugins: [

@@ -8,6 +8,7 @@ import {AnimatedLine, useAnimatedLine} from "src/components/AnimatedLine";
 import {useChain, useSpring} from "react-spring";
 import {Circle} from "src/components/Circle";
 import {isNull} from "lodash";
+import {HighlightBlock} from "src/components/HighlightBlock";
 
 const LINE_CONFIG = {
     OBSERVER_TO_CONCAT: {
@@ -71,7 +72,7 @@ export const ConcatDemo = () => {
     useChain([source2Ref], [0.5]);
 
     const source1CircleStyles: any = useSpring({
-        from: {x: 40, y: 15},
+        from: {x: 40, y: 16},
         to: async (next: any) => {
             if (isSource1RefComplete) {
                 await next({x: 100, y: 230});
@@ -80,7 +81,7 @@ export const ConcatDemo = () => {
                 await next({x: 100, y: 140, config: {duration: 10}});
                 await next({x: 100, y: 230, config: {duration: 1000}});
             } else {
-                await next({x: 40, y: 15});
+                await next({x: 40, y: 16});
             }
         },
         onRest: () => {
@@ -91,7 +92,7 @@ export const ConcatDemo = () => {
     });
 
     const source2CircleStyles: any = useSpring({
-        from: {x: 160, y: 15},
+        from: {x: 160, y: 16},
         to: async (next: any) => {
             if (isSource2RefComplete) {
                 await next({x: 100, y: 200});
@@ -100,7 +101,7 @@ export const ConcatDemo = () => {
                 await next({x: 100, y: 140, config: {duration: 10}});
                 await next({x: 100, y: 200, config: {duration: 1000}});
             } else {
-                await next({x: 160, y: 15});
+                await next({x: 160, y: 16});
             }
         },
         onRest: () => {
@@ -111,7 +112,7 @@ export const ConcatDemo = () => {
     });
 
     return (
-        <div css={{width: 200}}>
+        <div>
             <DemoTitle>concat</DemoTitle>
             <DemoHeader>
                 <Button
@@ -135,29 +136,47 @@ export const ConcatDemo = () => {
                     重置动画
                 </Button>
             </DemoHeader>
-            <svg width={"100%"} height={"100%"} viewBox={"0 0 200 300"}>
-                <AnimatedLine
-                    {...LINE_CONFIG.OBSERVER_TO_CONCAT}
-                    stroke={isSource2RefComplete ? COLORS.GREY : COLORS.GREEN}
-                    style={styleConcat}
-                />
-                <AnimatedLine
-                    {...LINE_CONFIG.CONCAT_TO_SOURCE1}
-                    stroke={isSource1RefComplete ? COLORS.GREY : COLORS.GREEN}
-                    style={styleSource1}
-                />
-                <AnimatedLine
-                    {...LINE_CONFIG.CONCAT_TO_SOURCE2}
-                    stroke={isSource2RefComplete ? COLORS.GREY : COLORS.GREEN}
-                    style={styleSource2}
-                />
-                <Circle text={"1"} translateX={source1CircleStyles.x} translateY={source1CircleStyles.y}/>
-                <Circle text={"2"} translateX={source2CircleStyles.x} translateY={source2CircleStyles.y}/>
-                <Rect width={80} height={40} text={"Source1$"}/>
-                <Rect width={80} height={40} x={120} text={"Source2$"}/>
-                <Rect width={200} height={40} y={120} text={"Concat$"}/>
-                <ObserverRect/>
-            </svg>
+            <div css={{display: "flex"}}>
+                <div css={{width: 200}}>
+                    <svg width={"100%"} height={"100%"} viewBox={"0 0 200 300"}>
+                        <AnimatedLine
+                            {...LINE_CONFIG.OBSERVER_TO_CONCAT}
+                            stroke={isSource2RefComplete ? COLORS.GREY : COLORS.GREEN}
+                            style={styleConcat}
+                        />
+                        <AnimatedLine
+                            {...LINE_CONFIG.CONCAT_TO_SOURCE1}
+                            stroke={isSource1RefComplete ? COLORS.GREY : COLORS.GREEN}
+                            style={styleSource1}
+                        />
+                        <AnimatedLine
+                            {...LINE_CONFIG.CONCAT_TO_SOURCE2}
+                            stroke={isSource2RefComplete ? COLORS.GREY : COLORS.GREEN}
+                            style={styleSource2}
+                        />
+                        <Circle text={"1"} translateX={source1CircleStyles.x} translateY={source1CircleStyles.y}/>
+                        <Circle text={"2"} translateX={source2CircleStyles.x} translateY={source2CircleStyles.y}/>
+                        <Rect width={80} height={40} text={"Source1$"}/>
+                        <Rect width={80} height={40} x={120} text={"Source2$"}/>
+                        <Rect width={200} height={40} y={120} text={"Concat$"}/>
+                        <ObserverRect/>
+                    </svg>
+                </div>
+
+                <HighlightBlock>
+                    <code css={{flex:1, height: 300, marginLeft: 25}}>
+                        {`
+                                        import { concat, of } from "rxjs";
+                                    
+                                        const source1$ = of(["1"]);
+                                        const source2$ = of(["2"]);
+                                        const source$ = concat(source1$, source2$);
+                                    
+                                        source$.subscribe(console.log);
+                                    `}
+                    </code>
+                </HighlightBlock>
+            </div>
             <DemoFooter/>
         </div>
     );

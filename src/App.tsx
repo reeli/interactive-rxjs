@@ -7,6 +7,21 @@ import {ErrorDemo} from "src/examples/ErrorDemo";
 import {ConcatDemo} from "src/examples/ConcatDemo";
 import {FilterDemo} from "src/examples/FilterDemo";
 import {MapDemo} from "src/examples/MapDemo";
+import {Link} from "src/components/Link";
+
+const secondaryLinkStyles = css({
+    marginLeft: "1rem"
+});
+
+const asideStyles = css({
+    position: "fixed",
+    left: 0,
+    top: 0,
+    bottom: 0,
+    width: 200,
+    padding: "2.5rem 0",
+    boxShadow: "0 5px 4px #888"
+});
 
 export const App = () => {
     return (
@@ -20,11 +35,26 @@ export const App = () => {
                 right: 0,
             }}
         >
-            <aside css={{position: "fixed", left: 0, top: 0, bottom: 0, width: 200}}>
-                <a href={"#basic"}>基础部分</a>
-                <a href={"#operator"}>操作符</a>
+            <aside css={asideStyles}>
+                <div>
+                    <Link href={"#basic"}>基础部分</Link>
+                    <div css={secondaryLinkStyles}>
+                        <Link href={"#subscribe-and-unsubscribe"}>subscribe and unsubscribe</Link>
+                        <Link href={"#complete"}>complete</Link>
+                        <Link href={"#error"}>error</Link>
+                    </div>
+                </div>
+                <div>
+                    <Link href={"#operator"}>操作符</Link>
+                    <div css={secondaryLinkStyles}>
+                        <Link href={"#create"}>创建数据流</Link>
+                        <Link href={"#merge"}>合并数据流</Link>
+                        <Link href={"#filter"}>过滤数据流</Link>
+                        <Link href={"#map"}>转化数据流</Link>
+                    </div>
+                </div>
             </aside>
-            <main css={{padding: 25, flex: 1, marginLeft: 200}}>
+            <main css={{padding: 25, width: 980, marginLeft: 240}}>
                 <Global
                     styles={css`
             html {
@@ -38,9 +68,9 @@ export const App = () => {
                 />
                 <section>
                     <h1>
-                        <a id="basic" href={"#basic"}>
+                        <Link id="basic" href={"#basic"}>
                             基础部分
-                        </a>
+                        </Link>
                     </h1>
                     <div css={{display: "flex", alignItems: "flex-end"}}>
                         <DemoWrapper>
@@ -56,32 +86,26 @@ export const App = () => {
                 </section>
                 <section>
                     <h1>
-                        <a id={"operator"} href={"#operator"}>
+                        <Link id={"operator"} href={"#operator"}>
                             操作符
-                        </a>
+                        </Link>
                     </h1>
                     <DemoWrapper>
-                        <div>合并数据流</div>
+                        <Link id="merge" href={"#merge"}>
+                            合并数据流
+                        </Link>
                         <ConcatDemo/>
-                        <div css={{width: 300}}>
-                            <code>
-                                {`import { concat, of } from "rxjs";
-                                    
-                                    const source1$ = of(["1"]);
-                                    const source2$ = of(["2"]);
-                                    const source$ = concat(source1$, source2$);
-                                    
-                                    source$.subscribe(console.log);
-                                    `}
-                            </code>
-                        </div>
                     </DemoWrapper>
                     <DemoWrapper>
-                        <div>过滤数据流</div>
+                        <Link id="filter" href={"#merge"}>
+                            过滤数据流
+                        </Link>
                         <FilterDemo/>
                     </DemoWrapper>
                     <DemoWrapper>
-                        <div>转化数据流</div>
+                        <Link id="map" href={"#merge"}>
+                            转化数据流
+                        </Link>
                         <MapDemo/>
                     </DemoWrapper>
                 </section>
