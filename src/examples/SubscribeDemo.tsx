@@ -1,7 +1,7 @@
 import { useSpring } from "react-spring";
 import React, { useState } from "react";
 import { COLORS } from "src/style";
-import { DemoFooter, DemoHeader, DemoTitle } from "src/components/Demo";
+import { DemoFooter, DemoHeader, DemoTitle, DemoWrapper } from "src/components/Demo";
 import { Button } from "src/components/Button";
 import { isNull } from "lodash";
 import { AnimatedLine } from "src/components/AnimatedLine";
@@ -22,7 +22,7 @@ export const SubscribeDemo = () => {
   });
 
   return (
-    <div css={{ width: 200 }}>
+    <DemoWrapper>
       <DemoTitle>Subscribe and Unsubscribe</DemoTitle>
       <DemoHeader>
         <Button
@@ -34,25 +34,27 @@ export const SubscribeDemo = () => {
           {toggle ? "取消订阅 unsubscribe" : "订阅 subscribe"}
         </Button>
       </DemoHeader>
-      <svg width={"100%"} height={"100%"} viewBox={"0 0 200 300"}>
-        <AnimatedLine style={props} stroke={COLORS.GREEN} />
-        <ObservableRect />
-        <ObserverRect>
-          <text
-            x={100}
-            y={293}
-            css={{ fontSize: "1.4rem", cursor: "pointer" }}
-            textAnchor={"middle"}
-            onClick={() => setToggle(!toggle)}
-            fill={COLORS.BLUE}
-          >
-            {toggle ? "取消订阅 unsubscribe" : "订阅 subscribe"}
-          </text>
-        </ObserverRect>
-      </svg>
+      <div css={{ width: 200 }}>
+        <svg width={"100%"} height={"100%"} viewBox={"0 0 200 300"}>
+          <AnimatedLine style={props} stroke={COLORS.GREEN} />
+          <ObservableRect />
+          <ObserverRect>
+            <text
+              x={100}
+              y={293}
+              css={{ fontSize: "1.4rem", cursor: "pointer" }}
+              textAnchor={"middle"}
+              onClick={() => setToggle(!toggle)}
+              fill={COLORS.BLUE}
+            >
+              {toggle ? "取消订阅 unsubscribe" : "订阅 subscribe"}
+            </text>
+          </ObserverRect>
+        </svg>
+      </div>
       <DemoFooter>
         {isNull(toggle) ? null : toggle ? <div>已订阅，现在可以向观察者推送数据了</div> : <div>已取消订阅</div>}
       </DemoFooter>
-    </div>
+    </DemoWrapper>
   );
 };

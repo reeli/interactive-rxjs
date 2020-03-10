@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { COLORS } from "src/style";
-import {DemoFooter, DemoHeader, DemoTitle} from "src/components/Demo";
+import { DemoFooter, DemoHeader, DemoTitle, DemoWrapper } from "src/components/Demo";
 import { Button } from "src/components/Button";
 import { useSpring } from "react-spring";
 import { AnimatedCircles } from "src/components/AnimatedCircles";
@@ -33,7 +33,7 @@ export const CompleteDemo = () => {
   });
 
   return (
-    <div css={{ width: 200 }}>
+    <DemoWrapper>
       <DemoTitle>Complete</DemoTitle>
       <DemoHeader>
         {!subscribed && (
@@ -59,25 +59,27 @@ export const CompleteDemo = () => {
           重置动画
         </Button>
       </DemoHeader>
-      <svg width={"100%"} height={"100%"} viewBox={"0 0 200 300"}>
-        <AnimatedLine stroke={completed && !reset ? COLORS.GREY : COLORS.GREEN} style={props} />
-        {reset ? null : (
-          <AnimatedCircles
-            data={data}
-            completed={completed}
-            started={started}
-            onReset={() => {
-              setCompleted(true);
-            }}
-          />
-        )}
-        <ObservableRect />
-        <ObserverRect />
-      </svg>
+      <div css={{ width: 200 }}>
+        <svg width={"100%"} height={"100%"} viewBox={"0 0 200 300"}>
+          <AnimatedLine stroke={completed && !reset ? COLORS.GREY : COLORS.GREEN} style={props} />
+          {reset ? null : (
+            <AnimatedCircles
+              data={data}
+              completed={completed}
+              started={started}
+              onReset={() => {
+                setCompleted(true);
+              }}
+            />
+          )}
+          <ObservableRect />
+          <ObserverRect />
+        </svg>
+      </div>
       <DemoFooter>
         {subscribed && <div>已订阅，现在可以向观察者推送数据了</div>}
         {completed && !reset && <div>Observable 已完结，表示「没有更多数据了」，之后也不会再向 Observer 推送数据</div>}
       </DemoFooter>
-    </div>
+    </DemoWrapper>
   );
 };

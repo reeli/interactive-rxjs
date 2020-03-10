@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { COLORS } from "src/style";
-import {DemoFooter, DemoHeader, DemoTitle} from "src/components/Demo";
+import {DemoFooter, DemoHeader, DemoTitle, DemoWrapper} from "src/components/Demo";
 import { Button } from "src/components/Button";
 import { AnimatedCircles } from "src/components/AnimatedCircles";
 import { ObservableRect } from "src/components/ObservableRect";
@@ -14,7 +14,7 @@ export const ErrorDemo = () => {
   const [reset, setReset] = useState(false);
 
   return (
-    <div css={{ width: 200 }}>
+    <DemoWrapper>
       <DemoTitle>Error</DemoTitle>
       <DemoHeader>
         <Button
@@ -37,7 +37,8 @@ export const ErrorDemo = () => {
           重置动画
         </Button>
       </DemoHeader>
-      <svg width={"100%"} height={"100%"} viewBox={"0 0 200 300"}>
+        <div css={{ width: 200 }}>
+        <svg width={"100%"} height={"100%"} viewBox={"0 0 200 300"}>
         <line
           x1={100}
           x2={100}
@@ -59,7 +60,8 @@ export const ErrorDemo = () => {
         <ObservableRect />
         <ObserverRect />
       </svg>
+        </div>
       <DemoFooter>{completed && !reset && <div>出错了！</div>}</DemoFooter>
-    </div>
+    </DemoWrapper>
   );
 };
