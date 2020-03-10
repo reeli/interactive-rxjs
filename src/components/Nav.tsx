@@ -12,17 +12,17 @@ const ROUTES = [
       {
         id: "subscribe-and-unsubscribe",
         text: "subscribe and unsubscribe",
-        path: "#subscribe-and-unsubscribe",
+        path: "#basic",
       },
       {
         id: "complete",
         text: "complete",
-        path: "#complete",
+        path: "#basic",
       },
       {
         id: "error",
         text: "error",
-        path: "#error",
+        path: "#basic",
       },
     ],
   },

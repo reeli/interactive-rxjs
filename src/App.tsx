@@ -61,17 +61,8 @@ export const App = () => {
             <Link id={"operator"} href={"#operator"} variant={"h2"}>
               操作符
             </Link>
-            <Link id="merge" href={"#merge"}>
-              合并数据流
-            </Link>
             <ConcatDemo />
-            <Link id="filter" href={"#merge"}>
-              过滤数据流
-            </Link>
             <FilterDemo />
-            <Link id="map" href={"#merge"}>
-              转化数据流
-            </Link>
             <MapDemo />
           </section>
           <section>

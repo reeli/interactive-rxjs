@@ -7,23 +7,31 @@ const linkStyles = css({
   fontSize: "1.6rem",
   display: "block",
   textDecoration: "none",
+  margin:"1rem 0"
 });
 
 const styles = {
-  body: {
-    fontSize: "1.4rem",
-  },
   h2: {
+    fontSize: "2.6rem",
+    fontWeight: "bold",
+  },
+  h3: {
     fontSize: "2rem",
     fontWeight: "bold",
+  },
+  body1: {
+    fontSize: "1.6rem",
+  },
+  body2: {
+    fontSize: "1.4rem",
   },
 };
 
 interface ILinkProps extends AnchorHTMLAttributes<any> {
-  variant?: "body" | "h2";
+  variant?: "h2" | "h3" | "body1" | "body2";
 }
 
-export const Link: React.FC<ILinkProps> = ({ children, variant = "body", ...otherProps }) => (
+export const Link: React.FC<ILinkProps> = ({ children, variant = "body2", ...otherProps }) => (
   <a {...otherProps} css={[linkStyles, styles[variant]]}>
     {children}
   </a>
