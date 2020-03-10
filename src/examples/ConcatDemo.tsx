@@ -9,7 +9,6 @@ import { useChain, useSpring } from "react-spring";
 import { Circle } from "src/components/Circle";
 import { isNull } from "lodash";
 import { Highlight } from "src/components/Highlight";
-import { prettifyCode } from "src/utils";
 
 const LINE_CONFIG = {
   OBSERVER_TO_CONCAT: {
@@ -174,10 +173,7 @@ export const ConcatDemo = () => {
             <ObserverRect />
           </svg>
         </div>
-
-        <Highlight>
-          <pre css={{ flex: 1, height: 300, marginLeft: 100 }}>{prettifyCode(codePieces)}</pre>
-        </Highlight>
+        <Highlight>{codePieces}</Highlight>
       </div>
       <DemoFooter />
     </div>

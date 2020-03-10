@@ -1,16 +1,19 @@
-import React, {ReactElement, useEffect, useRef} from "react";
-import {highlightBlock} from "highlight.js";
+import React, { useEffect, useRef } from "react";
+import { highlightBlock } from "highlight.js";
+import { prettifyCode } from "src/utils";
 
-export const Highlight: React.FC<{ children: ReactElement }> = ({children}) => {
-    const childrenRef = useRef<Node>();
+export const Highlight: React.FC<{ children: string }> = ({ children }) => {
+  const preEl = useRef<HTMLPreElement | null>(null);
 
-    useEffect(() => {
-        if (childrenRef.current) {
-            highlightBlock(childrenRef.current)
-        }
-    }, []);
+  useEffect(() => {
+    if (preEl.current) {
+      highlightBlock(preEl.current);
+    }
+  }, []);
 
-    return React.cloneElement(children, {
-        ref: childrenRef
-    });
+  return (
+    <pre css={{ flex: 1, height: 300, marginLeft: 100 }} ref={preEl}>
+      {prettifyCode(children)}
+    </pre>
+  );
 };
