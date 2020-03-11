@@ -8,7 +8,9 @@ import { FilterDemo } from "src/examples/FilterDemo";
 import { MapDemo } from "src/examples/MapDemo";
 import { Nav } from "src/components/Nav";
 import { Link } from "src/components/Link";
-import {SubjectDemo} from "src/examples/SubjectDemo";
+import { SubjectDemo } from "src/examples/SubjectDemo";
+import { ColdObservableDemo } from "src/examples/ColdObservableDemo";
+import { HotObservableDemo } from "src/examples/HotObservableDemo";
 
 const asideStyles = css({
   position: "fixed",
@@ -71,9 +73,8 @@ export const App = () => {
               多播
             </Link>
             <SubjectDemo />
-          </section>
-          <section>
-            <h2>Hot Observable 与 Cold Observable</h2>
+            <ColdObservableDemo />
+            <HotObservableDemo />
           </section>
         </main>
       </div>
