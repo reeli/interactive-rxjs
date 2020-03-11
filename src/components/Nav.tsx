@@ -53,6 +53,12 @@ const ROUTES = [
       },
     ],
   },
+  {
+    id: "multicast",
+    text: "多播",
+    path: "#multicast",
+    routes: [],
+  },
 ];
 
 const secondaryLinkStyles = css({

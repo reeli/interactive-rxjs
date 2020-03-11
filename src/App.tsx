@@ -6,8 +6,9 @@ import { ErrorDemo } from "src/examples/ErrorDemo";
 import { ConcatDemo } from "src/examples/ConcatDemo";
 import { FilterDemo } from "src/examples/FilterDemo";
 import { MapDemo } from "src/examples/MapDemo";
-import { Link } from "src/components/Link";
 import { Nav } from "src/components/Nav";
+import { Link } from "src/components/Link";
+import {SubjectDemo} from "src/examples/SubjectDemo";
 
 const asideStyles = css({
   position: "fixed",
@@ -66,7 +67,10 @@ export const App = () => {
             <MapDemo />
           </section>
           <section>
-            <h2>单播和多播</h2>
+            <Link id="multicast" href={"#multicast"} variant={"h2"}>
+              多播
+            </Link>
+            <SubjectDemo />
           </section>
           <section>
             <h2>Hot Observable 与 Cold Observable</h2>
