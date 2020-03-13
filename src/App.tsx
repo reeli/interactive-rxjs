@@ -11,15 +11,17 @@ import { Link } from "src/components/Link";
 import { SubjectDemo } from "src/examples/SubjectDemo";
 import { ColdObservableDemo } from "src/examples/ColdObservableDemo";
 import { HotObservableDemo } from "src/examples/HotObservableDemo";
+import { IconGithub } from "src/assets/IconGithub";
+import { COLORS } from "src/style";
 
 const asideStyles = css({
   position: "fixed",
   left: 0,
-  top: 0,
+  top: 60,
   bottom: 0,
   width: 200,
   padding: "2.5rem",
-  boxShadow: "0 5px 4px #888",
+  boxShadow: "0 2px 2px #888",
 });
 
 export const App = () => {
@@ -46,10 +48,35 @@ export const App = () => {
           right: 0,
         }}
       >
+        <header
+          css={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            height: 60,
+            boxShadow: "0 2px 4px 0 rgba(0,0,0,.3)",
+            background: COLORS.WHITE,
+          }}
+        >
+          <h2 css={{ marginLeft: 20 }}>通过交互式动画学习 RxJS</h2>
+          <a
+            href={"https://github.com/reeli/interactive-rxjs"}
+            target={"_blank"}
+            title={"github"}
+            css={{ marginRight: 100 }}
+          >
+            <IconGithub width="100%" height="100%" fill={COLORS.BLACK} css={{ width: 24, height: 24 }} />
+          </a>
+        </header>
         <aside css={asideStyles}>
           <Nav />
         </aside>
-        <main css={{ padding: 25, width: 980, marginLeft: 280 }}>
+
+        <main css={{ padding: 25, width: 980, marginLeft: 280, marginTop: 60 }}>
           <section>
             <Link id="basic" href={"#basic"} variant={"h2"}>
               基础部分

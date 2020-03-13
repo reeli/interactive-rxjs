@@ -5,7 +5,7 @@ import { css } from "@emotion/core";
 
 const ROUTES = [
   {
-    text: "基础部分",
+    text: "Observable",
     id: "basic",
     path: "#basic",
     routes: [
@@ -110,5 +110,13 @@ export const Nav = () => (
         </div>
       </div>
     ))}
+    <Link
+      href={"https://github.com/reeli/interactive-rxjs"}
+      target={"_blank"}
+      title={"github"}
+      css={{ marginTop: 100, marginRight: 100, textDecoration: "underline" }}
+    >
+      访问 Github >>
+    </Link>
   </>
 );
