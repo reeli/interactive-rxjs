@@ -116,7 +116,7 @@ export const ColdObservableDemo = () => {
             {map(springs2, (style: any, i) => (
               <Circle translateX={style.x} translateY={style.y} key={i} text={() => data[i]} />
             ))}
-            <Rect width={200} height={40} text={"Source$"} />
+            <Rect width={100} height={40} x={50} text={"Source$"} />
             <Rect width={80} height={40} y={220} text={"ObserverA"} fill={COLORS.SECONDARY} />
             <Rect width={80} height={40} x={120} y={220} text={"ObserverB"} fill={COLORS.SECONDARY} />
           </svg>

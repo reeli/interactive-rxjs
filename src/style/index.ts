@@ -5,6 +5,6 @@ export const COLORS = {
   GREY: "#ccc",
   BLUE:"rgb(62, 161, 203)",
   PRIMARY: "#FFCA78",
-  SECONDARY: "#ccc",
+  SECONDARY: "#f1f1f1",
   ERROR:"#f00"
 };
