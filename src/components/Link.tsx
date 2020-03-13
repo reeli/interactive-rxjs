@@ -7,7 +7,10 @@ const linkStyles = css({
   fontSize: "1.6rem",
   display: "block",
   textDecoration: "none",
-  margin:"1rem 0"
+  margin: "1rem 0",
+  "&:focus": {
+    outline: "none",
+  },
 });
 
 const styles = {
