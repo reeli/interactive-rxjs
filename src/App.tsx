@@ -13,6 +13,7 @@ import { ColdObservableDemo } from "src/examples/ColdObservableDemo";
 import { HotObservableDemo } from "src/examples/HotObservableDemo";
 import { IconGithub } from "src/assets/IconGithub";
 import { COLORS } from "src/style";
+import { MergeDemo } from "./examples/MergeDemo";
 
 const asideStyles = css({
   position: "fixed",
@@ -77,6 +78,7 @@ export const App = () => {
               操作符
             </Link>
             <ConcatDemo />
+            <MergeDemo />
             <FilterDemo />
             <MapDemo />
           </section>

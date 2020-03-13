@@ -22,7 +22,7 @@ export const useAnimatedLine = ({
   y2: number;
   started: boolean | null;
   onReset?: () => void;
-  elementRef: RefObject<any>;
+  elementRef?: RefObject<any>;
 }) => {
   return useSpring<any>({
     ref: elementRef as any,
