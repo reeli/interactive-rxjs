@@ -42,8 +42,8 @@ const source$ = concat(source1$, source2$);
 source$.subscribe(console.log);
 `;
 
-const data1 = [1, 2];
-const data2 = ["A", "B"];
+const data1 = ["A1", "A2", "A3"];
+const data2 = ["B1", "B2", "B3"];
 
 export const MergeDemo = () => {
   const [started, setStarted] = useState<boolean | null>(null);
@@ -54,15 +54,12 @@ export const MergeDemo = () => {
       from: { x: 40, y: 16 },
       to: async (next: any) => {
         if (started) {
-          await next({ x: 40, y: 140, config: { duration: 1000 } });
+          await next({ x: 40, y: 140, config: { duration: 750 } });
           await next({ x: 100, y: 140, config: { duration: 10 } });
-          await next({ x: 100, y: 270, config: { duration: 1000 } });
+          await next({ x: 100, y: 270, config: { duration: 740 } });
         }
       },
-      delay: i === 0 ? 2000 : 7000,
-      config: {
-        duration: 1000,
-      },
+      delay: 2000 + i * 5000,
     })),
   );
 
@@ -72,15 +69,12 @@ export const MergeDemo = () => {
       from: { x: 160, y: 16 },
       to: async (next: any) => {
         if (started) {
-          await next({ x: 160, y: 140, config: { duration: 1000 } });
+          await next({ x: 160, y: 140, config: { duration: 750 } });
           await next({ x: 100, y: 140, config: { duration: 10 } });
-          await next({ x: 100, y: 270, config: { duration: 1000 } });
+          await next({ x: 100, y: 270, config: { duration: 740 } });
         }
       },
-      delay: i === 0 ? 5000 : 10000,
-      config: {
-        duration: 1000,
-      },
+      delay: 5000 + i * 5000,
     })),
   );
 
@@ -94,7 +88,7 @@ export const MergeDemo = () => {
     y1: LINE_CONFIG.LINE1.y1,
     y2: LINE_CONFIG.LINE1.y2,
     started,
-    delay: 1000,
+    delay: 600,
   });
 
   const styleLine2 = useAnimatedLine({
@@ -137,8 +131,8 @@ export const MergeDemo = () => {
             {map(springs2, (style: any, i) => (
               <Circle translateX={style.x} translateY={style.y} key={i} text={() => data2[i]} />
             ))}
-            <Rect width={80} height={40} text={"Source1$"} />
-            <Rect width={80} height={40} x={120} text={"Source2$"} />
+            <Rect width={80} height={40} text={"SourceA$"} />
+            <Rect width={80} height={40} x={120} text={"SourceB$"} />
             <Rect width={200} height={40} y={120} text={"Merge$"} />
             <ObserverRect />
           </svg>
