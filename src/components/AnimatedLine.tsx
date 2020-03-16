@@ -17,12 +17,14 @@ export const useAnimatedLine = ({
   started,
   onReset,
   elementRef,
+  delay = 0,
 }: {
   y1: number;
   y2: number;
   started: boolean | null;
   onReset?: () => void;
   elementRef?: RefObject<any>;
+  delay?: number;
 }) => {
   return useSpring<any>({
     ref: elementRef as any,
@@ -34,6 +36,7 @@ export const useAnimatedLine = ({
       y1: y2,
       y2: started ? y1 : y2,
     },
+    delay,
     onRest: () => {
       if (!isNull(started)) {
         onReset && onReset();

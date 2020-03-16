@@ -7,7 +7,7 @@ import { ObserverRect } from "src/components/ObserverRect";
 import { AnimatedLine, useAnimatedLine } from "src/components/AnimatedLine";
 import { useSprings } from "react-spring";
 import { Highlight } from "src/components/Highlight";
-import { isNull, map } from "lodash";
+import { map } from "lodash";
 import { Circle } from "src/components/Circle";
 
 const LINE_CONFIG = {
@@ -42,38 +42,26 @@ const source$ = concat(source1$, source2$);
 source$.subscribe(console.log);
 `;
 
-const data1 = [1, 2, 3];
-const data2 = ["A", "B", "C"];
+const data1 = [1, 2];
+const data2 = ["A", "B"];
 
 export const MergeDemo = () => {
   const [started, setStarted] = useState<boolean | null>(null);
-  const [subscribedToSource1, setSubscribedToSource1] = useState<boolean | null>(null);
-  const [subscribedToSource2, setSubscribedToSource2] = useState<boolean | null>(null);
-  const [startSource2, setStartSource2] = useState<boolean | null>(null);
 
   const springs = useSprings(
     data1.length,
     data1.map((_, i) => ({
       from: { x: 40, y: 16 },
       to: async (next: any) => {
-        if (startSource2) {
-          await next({ x: 100, y: 230 });
-        } else if (subscribedToSource1) {
+        if (started) {
           await next({ x: 40, y: 140, config: { duration: 1000 } });
           await next({ x: 100, y: 140, config: { duration: 10 } });
-          await next({ x: 100, y: 230, config: { duration: 1000 } });
-        } else {
-          await next({ x: 40, y: 16 });
+          await next({ x: 100, y: 270, config: { duration: 1000 } });
         }
       },
-      delay: i * 2000,
+      delay: i === 0 ? 2000 : 7000,
       config: {
         duration: 1000,
-      },
-      onRest: () => {
-        if (!isNull(subscribedToSource1) && i === 0) {
-          setStartSource2(true);
-        }
       },
     })),
   );
@@ -83,23 +71,15 @@ export const MergeDemo = () => {
     data1.map((_, i) => ({
       from: { x: 160, y: 16 },
       to: async (next: any) => {
-        if (subscribedToSource2) {
-          await next({ x: 100, y: 200 });
-        } else if (startSource2) {
+        if (started) {
           await next({ x: 160, y: 140, config: { duration: 1000 } });
           await next({ x: 100, y: 140, config: { duration: 10 } });
-          await next({ x: 100, y: 200, config: { duration: 1000 } });
-        } else {
-          await next({ x: 160, y: 16 });
+          await next({ x: 100, y: 270, config: { duration: 1000 } });
         }
       },
-      delay: i * 3000,
+      delay: i === 0 ? 5000 : 10000,
       config: {
         duration: 1000,
-      },
-      onRest: () => {
-        if (!isNull(startSource2) && i === data1.length - 1) {
-        }
       },
     })),
   );
@@ -114,18 +94,14 @@ export const MergeDemo = () => {
     y1: LINE_CONFIG.LINE1.y1,
     y2: LINE_CONFIG.LINE1.y2,
     started,
-    onReset: () => {
-      setSubscribedToSource1(true);
-    },
+    delay: 1000,
   });
 
   const styleLine2 = useAnimatedLine({
     y1: LINE_CONFIG.LINE2.y1,
     y2: LINE_CONFIG.LINE2.y2,
-    started: startSource2,
-    onReset: () => {
-      setSubscribedToSource2(true);
-    },
+    started,
+    delay: 4000,
   });
 
   return (
@@ -143,7 +119,6 @@ export const MergeDemo = () => {
         <Button
           onClick={() => {
             setStarted(null);
-            setSubscribedToSource1(null);
           }}
           css={{ marginLeft: 5 }}
         >
