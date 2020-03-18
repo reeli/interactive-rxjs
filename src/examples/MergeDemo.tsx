@@ -7,7 +7,7 @@ import { ObserverRect } from "src/components/ObserverRect";
 import { AnimatedLine, useAnimatedLine } from "src/components/AnimatedLine";
 import { useSprings } from "react-spring";
 import { Highlight } from "src/components/Highlight";
-import { map } from "lodash";
+import { isNull, map } from "lodash";
 import { Circle } from "src/components/Circle";
 
 const LINE_CONFIG = {
@@ -42,8 +42,8 @@ const source$ = concat(source1$, source2$);
 source$.subscribe(console.log);
 `;
 
-const data1 = ["A1", "A2", "A3"];
-const data2 = ["B1", "B2", "B3"];
+const data1 = ["A1", "A2"];
+const data2 = ["B1", "B2"];
 
 export const MergeDemo = () => {
   const [started, setStarted] = useState<boolean | null>(null);
@@ -59,13 +59,18 @@ export const MergeDemo = () => {
           await next({ x: 100, y: 270, config: { duration: 740 } });
         }
       },
-      delay: 2000 + i * 5000,
+      delay: 1000 + i * 3500,
+      onRest: () => {
+        if (!isNull(started) && i === data1.length - 1) {
+          console.log("end1");
+        }
+      },
     })),
   );
 
   const springs2 = useSprings(
-    data1.length,
-    data1.map((_, i) => ({
+    data2.length,
+    data2.map((_, i) => ({
       from: { x: 160, y: 16 },
       to: async (next: any) => {
         if (started) {
@@ -74,7 +79,12 @@ export const MergeDemo = () => {
           await next({ x: 100, y: 270, config: { duration: 740 } });
         }
       },
-      delay: 5000 + i * 5000,
+      delay: 3000 + i * 3500,
+      onRest: () => {
+        if (!isNull(started) && i === data2.length - 1) {
+          console.log("end2");
+        }
+      },
     })),
   );
 
@@ -95,7 +105,7 @@ export const MergeDemo = () => {
     y1: LINE_CONFIG.LINE2.y1,
     y2: LINE_CONFIG.LINE2.y2,
     started,
-    delay: 4000,
+    delay: 2500,
   });
 
   return (
