@@ -1,4 +1,4 @@
-import { AnimatedLine } from "src/components/AnimatedLine";
+import { AnimatedLine, useAnimatedLine2 } from "src/components/AnimatedLine";
 import { COLORS } from "src/style";
 import { Rect } from "src/components/Rect";
 import React, { useState } from "react";
@@ -61,7 +61,7 @@ export const HotObservableDemo = () => {
     data.map((_, i) => ({
       from: { x: 100, y: 20 },
       to: started ? { x: 35, y: 200 } : { x: 100, y: 20 },
-      delay: i * 1000,
+      delay: 600 + i * 1000,
       config: {
         duration: 2000,
       },
@@ -83,6 +83,23 @@ export const HotObservableDemo = () => {
       },
     })),
   );
+
+  const styleLine1 = useAnimatedLine2({
+    x1: LINE_CONFIG.LINE1.x1,
+    x2: LINE_CONFIG.LINE1.x2,
+    y1: LINE_CONFIG.LINE1.y1,
+    y2: LINE_CONFIG.LINE1.y2,
+    started,
+  });
+
+  const styleLine2 = useAnimatedLine2({
+    x1: LINE_CONFIG.LINE2.x1,
+    x2: LINE_CONFIG.LINE2.x2,
+    y1: LINE_CONFIG.LINE2.y1,
+    y2: LINE_CONFIG.LINE2.y2,
+    started,
+    delay: 2000,
+  });
 
   return (
     <>
@@ -109,8 +126,8 @@ export const HotObservableDemo = () => {
       <div css={{ display: "flex" }}>
         <div css={{ width: 200 }}>
           <svg width={"100%"} height={"100%"} viewBox={"0 0 200 300"}>
-            <AnimatedLine {...LINE_CONFIG.LINE1} stroke={COLORS.GREEN} />
-            <AnimatedLine {...LINE_CONFIG.LINE2} stroke={COLORS.GREEN} />
+            <AnimatedLine {...LINE_CONFIG.LINE1} stroke={COLORS.GREEN} style={styleLine1} />
+            <AnimatedLine {...LINE_CONFIG.LINE2} stroke={COLORS.GREEN} style={styleLine2} />
             {map(springs, (style: any, i) => (
               <Circle translateX={style.x} translateY={style.y} key={i} text={() => data[i]} />
             ))}

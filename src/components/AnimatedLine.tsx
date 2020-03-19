@@ -45,6 +45,49 @@ export const useAnimatedLine = ({
   });
 };
 
+
+export const useAnimatedLine2 = ({
+                           x1=0,
+                           x2=0,
+                           y1,
+                           y2,
+                           started,
+                           onReset,
+                           elementRef,
+                           delay = 0,
+                         }: {
+  x1?: number;
+  x2?: number;
+  y1: number;
+  y2: number;
+  started: boolean | null;
+  onReset?: () => void;
+  elementRef?: RefObject<any>;
+  delay?: number;
+}) => {
+  return useSpring<any>({
+    ref: elementRef as any,
+    from: {
+      x1: x2,
+      x2: started ? x1 : x2,
+      y1: y2,
+      y2: started ? y1 : y2,
+    },
+    to: {
+      x1: x2,
+      x2: started ? x1 : x2,
+      y1: y2,
+      y2: started ? y1 : y2,
+    },
+    delay,
+    onRest: () => {
+      if (!isNull(started)) {
+        onReset && onReset();
+      }
+    },
+  });
+};
+
 export const SpringAnimatedLine = forwardRef<any, ISpringAnimatedLineProps>(
   ({ y1, y2, x1, x2, onReset, started = true, ...others }, elementRef) => {
     const styles = useSpring<any>({
