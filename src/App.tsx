@@ -14,6 +14,7 @@ import { HotObservableDemo } from "src/examples/HotObservableDemo";
 import { IconGithub } from "src/assets/IconGithub";
 import { COLORS } from "src/style";
 import { MergeDemo } from "./examples/MergeDemo";
+import { PartitionDemo } from "src/examples/PartitionDemo";
 
 const asideStyles = css({
   position: "fixed",
@@ -23,6 +24,7 @@ const asideStyles = css({
   width: 200,
   padding: "2.5rem",
   boxShadow: "0 0 2px #888",
+  overflowY: "scroll",
 });
 
 export const App = () => {
@@ -81,6 +83,7 @@ export const App = () => {
             <MergeDemo />
             <FilterDemo />
             <MapDemo />
+            <PartitionDemo />
           </section>
           <section>
             <Link id="multicast" href={"#multicast"} variant={"h2"}>
