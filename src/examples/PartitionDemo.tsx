@@ -7,6 +7,7 @@ import { animated, useSpring, useSprings } from "react-spring";
 import { line } from "d3-shape";
 import { isNull, map } from "lodash";
 import { Circle } from "src/components/Circle";
+import { Highlight } from "src/components/Highlight";
 
 const data1 = ["1", "3"];
 const data2 = ["2", "4"];
@@ -15,7 +16,7 @@ const Source1 = ({ started, onRest }: { started: boolean | null; onRest?: () => 
   const springs = useSprings(
     data1.length,
     data1.map((_, i) => ({
-      from: { x: 100, y: 0 },
+      from: { x: 100, y: 30 / 2 + 2 },
       config: {
         native: true,
       },
@@ -48,7 +49,7 @@ const Source2 = ({ started, onRest }: { started: boolean | null; onRest?: () => 
   const springs2 = useSprings(
     data2.length,
     data2.map((_, i) => ({
-      from: { x: 100, y: 0 },
+      from: { x: 100, y: 30 / 2 + 2 },
       to: async (next: any) => {
         if (started) {
           await next({ x: 100, y: 120, config: { duration: 740 } });
@@ -79,6 +80,17 @@ const Source2 = ({ started, onRest }: { started: boolean | null; onRest?: () => 
 
 const MSource1 = memo(Source1);
 const MSource2 = memo(Source2);
+
+const codePieces = `
+import { interval, partition } from "rxjs";
+import { take } from "rxjs/operators";
+
+const observableValues = interval(1000).pipe(take(4));
+const [evens$, odds$] = partition(observableValues, value => value % 2 === 0);
+
+odds$.subscribe(x => console.log("odds", x));
+evens$.subscribe(x => console.log("evens", x));
+`;
 
 export const PartitionDemo = () => {
   const [started, setStarted] = useState<boolean | null>(null);
@@ -169,6 +181,7 @@ export const PartitionDemo = () => {
             <Rect width={80} height={40} x={120} y={250} text={"ObserverB"} fill={COLORS.SECONDARY} />
           </svg>
         </div>
+        <Highlight>{codePieces}</Highlight>
       </div>
       <DemoFooter />
     </div>
