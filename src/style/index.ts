@@ -9,4 +9,5 @@ export const COLORS = {
   ERROR: "#f00",
   TEXT_SECONDARY: "#364149",
   PURPLE: "#c3c3f4",
+  LIGHT_GREEN:"#82D737"
 };

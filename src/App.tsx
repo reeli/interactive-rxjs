@@ -15,10 +15,11 @@ import { IconGithub } from "src/assets/IconGithub";
 import { COLORS } from "src/style";
 import { MergeDemo } from "./examples/MergeDemo";
 import { PartitionDemo } from "src/examples/PartitionDemo";
-import {FromEventDemo} from "src/examples/FromEventDemo";
-import {IntervalDemo} from "src/examples/IntervalDemo";
-import {TimerDemo} from "src/examples/TimerDemo";
-import {RaceDemo} from "src/examples/RaceDemo";
+import { FromEventDemo } from "src/examples/FromEventDemo";
+import { IntervalDemo } from "src/examples/IntervalDemo";
+import { TimerDemo } from "src/examples/TimerDemo";
+import { RaceDemo } from "src/examples/RaceDemo";
+import { ForkJoinDemo } from "src/examples/ForkJoinDemo";
 
 const asideStyles = css({
   position: "fixed",
@@ -92,12 +93,13 @@ export const App = () => {
                 <li>辅助类操作符：delay, observeOn</li>
               </ul>
             </div>
-            <FromEventDemo/>
-            <IntervalDemo/>
-            <TimerDemo/>
+            <FromEventDemo />
+            <IntervalDemo />
+            <TimerDemo />
             <ConcatDemo />
             <MergeDemo />
-            <RaceDemo/>
+            <RaceDemo />
+            <ForkJoinDemo />
             <FilterDemo />
             <MapDemo />
             <PartitionDemo />
