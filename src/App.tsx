@@ -79,6 +79,15 @@ export const App = () => {
             <Link id={"operator"} href={"#operator"} variant={"h2"}>
               操作符
             </Link>
+            <div>
+              <ul css={{ listStyle: "none", padding: 0 }}>
+                <li>创建数据流：from, fromEvent, interval, of, timer</li>
+                <li>合并数据流：concat, merge, combineLatest, race, forkJoin</li>
+                <li>过滤数据流：filter, take, throttle, debounce, ignoreElements, distinctUntilChanged</li>
+                <li>转化数据流：map, partition, mergeMap, switchMap, scan, groupBy</li>
+                <li>辅助类操作符：delay, observeOn</li>
+              </ul>
+            </div>
             <ConcatDemo />
             <MergeDemo />
             <FilterDemo />

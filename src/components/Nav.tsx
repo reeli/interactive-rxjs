@@ -84,26 +84,6 @@ const ROUTES = [
         text: "filter",
         path: "#filter",
       },
-      {
-        id: "take",
-        text: "take",
-        path: "#take",
-      },
-      {
-        id: "throttle",
-        text: "throttle",
-        path: "#throttle",
-      },
-      {
-        id: "debounce",
-        text: "debounce",
-        path: "#debounce",
-      },
-      {
-        id: "ignoreElements",
-        text: "ignoreElements",
-        path: "#ignoreElements",
-      },
     ],
   },
   {
