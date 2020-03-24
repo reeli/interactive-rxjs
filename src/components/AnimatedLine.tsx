@@ -1,6 +1,7 @@
 import { animated, useSpring } from "react-spring";
 import React, { forwardRef, RefObject } from "react";
 import { isNull } from "lodash";
+import {UseSpringProps} from "react-spring/web";
 
 export const AnimatedLine = animated(({ style, x1 = 100, x2 = 100, y1 = 100, strokeWidth = 2, ...otherProps }) => (
   <line x1={x1} x2={x2} strokeWidth={strokeWidth} y1={y1} {...otherProps} {...style} />
@@ -18,6 +19,7 @@ export const useAnimatedLine = ({
   onReset,
   elementRef,
   delay = 0,
+  ...others
 }: {
   y1: number;
   y2: number;
@@ -25,7 +27,7 @@ export const useAnimatedLine = ({
   onReset?: () => void;
   elementRef?: RefObject<any>;
   delay?: number;
-}) => {
+} & UseSpringProps<any>) => {
   return useSpring<any>({
     ref: elementRef as any,
     from: {
@@ -42,20 +44,20 @@ export const useAnimatedLine = ({
         onReset && onReset();
       }
     },
+    ...others,
   });
 };
 
-
 export const useAnimatedLine2 = ({
-                           x1=0,
-                           x2=0,
-                           y1,
-                           y2,
-                           started,
-                           onReset,
-                           elementRef,
-                           delay = 0,
-                         }: {
+  x1 = 0,
+  x2 = 0,
+  y1,
+  y2,
+  started,
+  onReset,
+  elementRef,
+  delay = 0,
+}: {
   x1?: number;
   x2?: number;
   y1: number;

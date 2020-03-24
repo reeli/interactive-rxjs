@@ -18,6 +18,7 @@ import { PartitionDemo } from "src/examples/PartitionDemo";
 import {FromEventDemo} from "src/examples/FromEventDemo";
 import {IntervalDemo} from "src/examples/IntervalDemo";
 import {TimerDemo} from "src/examples/TimerDemo";
+import {RaceDemo} from "src/examples/RaceDemo";
 
 const asideStyles = css({
   position: "fixed",
@@ -96,6 +97,7 @@ export const App = () => {
             <TimerDemo/>
             <ConcatDemo />
             <MergeDemo />
+            <RaceDemo/>
             <FilterDemo />
             <MapDemo />
             <PartitionDemo />
