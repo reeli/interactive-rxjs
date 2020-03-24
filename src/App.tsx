@@ -16,6 +16,7 @@ import { COLORS } from "src/style";
 import { MergeDemo } from "./examples/MergeDemo";
 import { PartitionDemo } from "src/examples/PartitionDemo";
 import {FromEventDemo} from "src/examples/FromEventDemo";
+import {IntervalDemo} from "src/examples/IntervalDemo";
 
 const asideStyles = css({
   position: "fixed",
@@ -90,6 +91,7 @@ export const App = () => {
               </ul>
             </div>
             <FromEventDemo/>
+            <IntervalDemo/>
             <ConcatDemo />
             <MergeDemo />
             <FilterDemo />
