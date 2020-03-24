@@ -50,14 +50,12 @@ export const FromEventDemo = () => {
     }
   }, []);
 
-  console.log(isEmpty(data),'data')
-
   return (
     <>
       <DemoTitle>fromEvent</DemoTitle>
       <DemoHeader>
         <Button css={{ color: COLORS.BLUE }} ref={btnRef}>
-          发送事件
+          产生事件（持续点击试试？）
         </Button>
         <Button css={{ marginLeft: 5 }}>重置动画</Button>
       </DemoHeader>

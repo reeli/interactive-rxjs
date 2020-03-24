@@ -16,11 +16,6 @@ const ROUTES = [
     path: "#create",
     routes: [
       {
-        id: "from",
-        text: "from",
-        path: "#from",
-      },
-      {
         id: "fromEvent",
         text: "fromEvent",
         path: "#fromEvent",
@@ -29,11 +24,6 @@ const ROUTES = [
         id: "interval",
         text: "interval",
         path: "#interval",
-      },
-      {
-        id: "of",
-        text: "of",
-        path: "#of",
       },
       {
         id: "timer",
@@ -83,6 +73,11 @@ const ROUTES = [
         id: "filter",
         text: "filter",
         path: "#filter",
+      },
+      {
+        id: "take",
+        text: "take",
+        path: "#take",
       },
     ],
   },

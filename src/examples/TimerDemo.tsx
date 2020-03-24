@@ -78,7 +78,7 @@ export const TimerDemo = () => {
       <DemoFooter>
         {started && (
           <div>
-            <p>延迟 2000 毫秒后才开始发送数据。</p>
+            <p>延迟 2000 毫秒后才开始发射数据。</p>
           </div>
         )}
       </DemoFooter>
