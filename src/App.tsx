@@ -20,6 +20,7 @@ import { IntervalDemo } from "src/examples/IntervalDemo";
 import { TimerDemo } from "src/examples/TimerDemo";
 import { RaceDemo } from "src/examples/RaceDemo";
 import { ForkJoinDemo } from "src/examples/ForkJoinDemo";
+import {ScanDemo} from "src/examples/ScanDemo";
 
 const asideStyles = css({
   position: "fixed",
@@ -103,6 +104,7 @@ export const App = () => {
             <FilterDemo />
             <MapDemo />
             <PartitionDemo />
+            <ScanDemo/>
           </section>
           <section>
             <Link id="multicast" href={"#multicast"} variant={"h2"}>
