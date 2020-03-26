@@ -6,11 +6,11 @@ import { isNull } from "lodash";
 import { AnimatedLine } from "src/components/AnimatedLine";
 import { ObservableRect } from "src/components/ObservableRect";
 import { ObserverRect } from "src/components/ObserverRect";
-import {useBasicLineAnimation} from "src/hooks/useBasicLineAnimation";
+import {useLineAnimation} from "src/hooks/useLineAnimation";
 
 export const SubscribeDemo = () => {
   const [subscribed, setSubscribed] = useState<boolean | null>(false);
-  const lineAnimationStyle = useBasicLineAnimation(subscribed);
+  const lineAnimationStyle = useLineAnimation(subscribed);
 
   return (
     <DemoWrapper>

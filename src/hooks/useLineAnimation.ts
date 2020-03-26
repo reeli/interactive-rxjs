@@ -5,7 +5,7 @@ const LINE_CONFIG = {
   y2: 50,
 };
 
-export const useBasicLineAnimation = (
+export const useLineAnimation = (
   toggle: boolean | null = null,
   onAnimationDone?: () => any,
   y1 = LINE_CONFIG.y1,
