@@ -2,41 +2,45 @@ import React, { useState } from "react";
 import { COLORS } from "src/style";
 import { DemoFooter, DemoHeader, DemoTitle, DemoWrapper } from "src/components/Demo";
 import { Button } from "src/components/Button";
-import { useSpring } from "react-spring";
 import { AnimatedCircles } from "src/components/AnimatedCircles";
 import { AnimatedLine } from "src/components/AnimatedLine";
 import { ObservableRect } from "src/components/ObservableRect";
 import { ObserverRect } from "src/components/ObserverRect";
+import { useLineAnimation } from "src/hooks/useLineAnimation";
 
-const data = ["1", "2", "3"];
+const data = [1, 2, 3];
 
 export const CompleteDemo = () => {
-  const [completed, setCompleted] = useState(false);
-  const [started, setStarted] = useState(false);
-  const [subscribed, setSubscribed] = useState(false);
-  const [reset, setReset] = useState(false);
-  const props = useSpring({
-    from: {
-      y1: 250,
-      y2: subscribed ? 50 : 250,
-    },
-    to: {
-      y1: 250,
-      y2: subscribed ? 50 : 250,
-    },
-    onRest: () => {
-      if (subscribed) {
-        setReset(false);
-        setStarted(true);
-      }
-    },
+  const [completed, setCompleted] = useState<boolean | null>(false);
+  const [started, setStarted] = useState<boolean | null>(false);
+
+  const [subscribed, setSubscribed] = useState<boolean | null>(false);
+  const [reset, setReset] = useState<boolean | null>(false);
+
+  const props = useLineAnimation(subscribed, () => {
+    if (subscribed) {
+      setReset(false);
+      setStarted(true);
+    }
   });
 
   return (
     <DemoWrapper>
       <DemoTitle>Complete</DemoTitle>
       <DemoHeader>
-        {!subscribed && (
+        {subscribed ? (
+          <Button
+            onClick={() => {
+              setReset(true);
+              setCompleted(false);
+              setStarted(false);
+              setSubscribed(false);
+            }}
+            css={{ marginLeft: 5 }}
+          >
+            重置动画
+          </Button>
+        ) : (
           <Button
             onClick={() => {
               setSubscribed(true);
@@ -46,28 +50,15 @@ export const CompleteDemo = () => {
             订阅
           </Button>
         )}
-
-        <Button
-          onClick={() => {
-            setReset(true);
-            setCompleted(false);
-            setStarted(false);
-            setSubscribed(false);
-          }}
-          css={{ marginLeft: 5 }}
-        >
-          重置动画
-        </Button>
       </DemoHeader>
       <div css={{ width: 200 }}>
         <svg width={"100%"} height={"100%"} viewBox={"0 0 200 300"}>
-          <AnimatedLine stroke={completed && !reset ? COLORS.GREY : COLORS.GREEN} style={props} />
+          <AnimatedLine stroke={completed ? COLORS.GREY : COLORS.GREEN} style={props} />
           {reset ? null : (
             <AnimatedCircles
               data={data}
-              completed={completed}
               started={started}
-              onReset={() => {
+              onAnimationEnd={() => {
                 setCompleted(true);
               }}
             />
@@ -77,8 +68,12 @@ export const CompleteDemo = () => {
         </svg>
       </div>
       <DemoFooter>
-        {subscribed && <div>已订阅，现在可以向观察者推送数据了</div>}
-        {completed && !reset && <div>Observable 已完结，表示「没有更多数据了」，之后也不会再向 Observer 推送数据</div>}
+        {reset ? null : (
+          <>
+            {subscribed && <div>已订阅，现在可以向观察者推送数据了</div>}
+            {completed && <div>Observable 已完结，表示「没有更多数据了」，之后也不会再向 Observer 推送数据</div>}
+          </>
+        )}
       </DemoFooter>
     </DemoWrapper>
   );

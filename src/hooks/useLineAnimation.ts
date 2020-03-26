@@ -1,13 +1,9 @@
 import { useSpring } from "react-spring";
-
-const LINE_CONFIG = {
-  y1: 250,
-  y2: 50,
-};
+import { LINE_CONFIG } from "src/constants";
 
 export const useLineAnimation = (
   toggle: boolean | null = null,
-  onAnimationDone?: () => any,
+  onAnimationEnd?: () => any,
   y1 = LINE_CONFIG.y1,
   y2 = LINE_CONFIG.y2,
 ) =>
@@ -17,12 +13,12 @@ export const useLineAnimation = (
       y2: toggle ? y2 : y1,
     },
     to: {
-      y1: y1,
+      y1,
       y2: toggle ? y2 : y1,
     },
     onRest: () => {
       if (toggle) {
-        onAnimationDone && onAnimationDone();
+        onAnimationEnd && onAnimationEnd();
       }
     },
   });

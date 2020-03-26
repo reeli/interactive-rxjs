@@ -50,9 +50,8 @@ export const ErrorDemo = () => {
         {reset ? null : (
           <AnimatedCircles
             data={data}
-            completed={completed}
             started={started}
-            onReset={() => {
+            onAnimationEnd={() => {
               setCompleted(true);
             }}
           />
