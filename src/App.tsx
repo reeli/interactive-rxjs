@@ -73,7 +73,7 @@ export const App = () => {
           </a>
           <section>
             <Link id="basic" href={"#basic"} variant={"h2"}>
-              基础部分
+              Observable and Observer
             </Link>
             <div css={{ display: "flex" }}>
               <SubscribeDemo />

@@ -11,18 +11,11 @@ import { useLineAnimation } from "src/hooks/useLineAnimation";
 const data = [1, 2, 3];
 
 export const CompleteDemo = () => {
-  const [completed, setCompleted] = useState<boolean | null>(false);
-  const [started, setStarted] = useState<boolean | null>(false);
+  const [subscribed, setSubscribed] = useState(false);
+  const [isAnimationEnd, setIsAnimationEnd] = useState(false);
+  const [reset, setReset] = useState(false);
 
-  const [subscribed, setSubscribed] = useState<boolean | null>(false);
-  const [reset, setReset] = useState<boolean | null>(false);
-
-  const props = useLineAnimation(subscribed, () => {
-    if (subscribed) {
-      setReset(false);
-      setStarted(true);
-    }
-  });
+  const lineAnimationStyle = useLineAnimation(subscribed);
 
   return (
     <DemoWrapper>
@@ -32,8 +25,7 @@ export const CompleteDemo = () => {
           <Button
             onClick={() => {
               setReset(true);
-              setCompleted(false);
-              setStarted(false);
+              setIsAnimationEnd(false);
               setSubscribed(false);
             }}
             css={{ marginLeft: 5 }}
@@ -43,6 +35,7 @@ export const CompleteDemo = () => {
         ) : (
           <Button
             onClick={() => {
+              setReset(false);
               setSubscribed(true);
             }}
             css={{ color: COLORS.BLUE }}
@@ -53,13 +46,12 @@ export const CompleteDemo = () => {
       </DemoHeader>
       <div css={{ width: 200 }}>
         <svg width={"100%"} height={"100%"} viewBox={"0 0 200 300"}>
-          <AnimatedLine stroke={completed ? COLORS.GREY : COLORS.GREEN} style={props} />
-          {reset ? null : (
+          <AnimatedLine stroke={isAnimationEnd ? COLORS.GREY : COLORS.GREEN} style={lineAnimationStyle} />
+          {subscribed && (
             <AnimatedCircles
               data={data}
-              started={started}
               onAnimationEnd={() => {
-                setCompleted(true);
+                setIsAnimationEnd(true);
               }}
             />
           )}
@@ -70,8 +62,8 @@ export const CompleteDemo = () => {
       <DemoFooter>
         {reset ? null : (
           <>
-            {subscribed && <div>已订阅，现在可以向观察者推送数据了</div>}
-            {completed && <div>Observable 已完结，表示「没有更多数据了」，之后也不会再向 Observer 推送数据</div>}
+            {subscribed && !isAnimationEnd && <div>已订阅，现在可以向观察者推送数据了</div>}
+            {isAnimationEnd && <div>Observable 已完结，表示「没有更多数据了」，之后也不会再向 Observer 推送数据</div>}
           </>
         )}
       </DemoFooter>

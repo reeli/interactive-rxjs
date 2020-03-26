@@ -1,66 +1,64 @@
 import React, { useState } from "react";
 import { COLORS } from "src/style";
-import {DemoFooter, DemoHeader, DemoTitle, DemoWrapper} from "src/components/Demo";
+import { DemoFooter, DemoHeader, DemoTitle, DemoWrapper } from "src/components/Demo";
 import { Button } from "src/components/Button";
 import { AnimatedCircles } from "src/components/AnimatedCircles";
 import { ObservableRect } from "src/components/ObservableRect";
 import { ObserverRect } from "src/components/ObserverRect";
+import { AnimatedLine } from "src/components/AnimatedLine";
+import { useLineAnimation } from "src/hooks/useLineAnimation";
 
 const data = ["1", "2"];
 
 export const ErrorDemo = () => {
-  const [completed, setCompleted] = useState(false);
-  const [started, setStarted] = useState(false);
+  const [subscribed, setSubscribed] = useState(false);
+  const [isAnimationEnd, setIsAnimationEnd] = useState(false);
   const [reset, setReset] = useState(false);
+  const lineAnimationStyle = useLineAnimation(subscribed);
 
   return (
     <DemoWrapper>
       <DemoTitle>Error</DemoTitle>
       <DemoHeader>
-        <Button
-          onClick={() => {
-            setReset(false);
-            setStarted(true);
-          }}
-          css={{ color: COLORS.BLUE }}
-        >
-          开始动画
-        </Button>
-        <Button
-          onClick={() => {
-            setReset(true);
-            setCompleted(false);
-            setStarted(false);
-          }}
-          css={{ marginLeft: 5 }}
-        >
-          重置动画
-        </Button>
-      </DemoHeader>
-        <div css={{ width: 200 }}>
-        <svg width={"100%"} height={"100%"} viewBox={"0 0 200 300"}>
-        <line
-          x1={100}
-          x2={100}
-          y1={50}
-          y2={250}
-          stroke={completed && !reset ? COLORS.ERROR : COLORS.GREEN}
-          strokeWidth={2}
-        />
-        {reset ? null : (
-          <AnimatedCircles
-            data={data}
-            started={started}
-            onAnimationEnd={() => {
-              setCompleted(true);
+        {subscribed ? (
+          <Button
+            onClick={() => {
+              setReset(true);
+              setIsAnimationEnd(false);
+              setSubscribed(false);
             }}
-          />
+            css={{ marginLeft: 5 }}
+          >
+            重置动画
+          </Button>
+        ) : (
+          <Button
+            onClick={() => {
+              setReset(false);
+              setSubscribed(true);
+            }}
+            css={{ color: COLORS.BLUE }}
+          >
+            订阅
+          </Button>
         )}
-        <ObservableRect />
-        <ObserverRect />
-      </svg>
-        </div>
-      <DemoFooter>{completed && !reset && <div>出错了！</div>}</DemoFooter>
+      </DemoHeader>
+      <div css={{ width: 200 }}>
+        <svg width={"100%"} height={"100%"} viewBox={"0 0 200 300"}>
+          <AnimatedLine stroke={isAnimationEnd ? COLORS.ERROR : COLORS.GREEN} style={lineAnimationStyle} />
+          {subscribed && (
+            <AnimatedCircles
+              data={data}
+              onAnimationEnd={() => {
+                setIsAnimationEnd(true);
+              }}
+            />
+          )}
+          <ObservableRect />
+          <ObserverRect />
+        </svg>
+      </div>
+      <DemoFooter>{isAnimationEnd && !reset && <div>出错了！</div>}</DemoFooter>
     </DemoWrapper>
   );
 };

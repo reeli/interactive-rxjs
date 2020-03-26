@@ -1,19 +1,13 @@
 import React from "react";
-import {map} from "lodash";
-import {Spring} from "react-spring/renderprops-universal";
-import {Circle} from "src/components/Circle";
-
-const CIRCLE_CONFIG = {
-  radius: 15,
-  strokeWidth: 2,
-  y: 250,
-};
+import { map } from "lodash";
+import { Spring } from "react-spring/renderprops-universal";
+import { Circle } from "src/components/Circle";
+import { CIRCLE_CONFIG } from "src/constants";
 
 export const AnimatedCircles: React.FC<{
   data: Array<string | number>;
-  started: boolean | null;
   onAnimationEnd?: () => void;
-}> = ({ data, started, onAnimationEnd }) => (
+}> = ({ data, onAnimationEnd }) => (
   <>
     {map(data, (text, i) => {
       const y1 = CIRCLE_CONFIG.radius + CIRCLE_CONFIG.strokeWidth;
@@ -21,11 +15,11 @@ export const AnimatedCircles: React.FC<{
       return (
         <Spring
           from={{ y: y1 }}
-          to={{ y: started ? y2 : y1 }}
-          delay={i * 1000}
+          to={{ y: y2 }}
+          delay={(i + 1) * 1000}
           key={i}
           onRest={() => {
-            if (started && i === data.length - 1) {
+            if (i === data.length - 1) {
               onAnimationEnd && onAnimationEnd();
             }
           }}
