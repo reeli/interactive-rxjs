@@ -8,16 +8,21 @@ import { AnimatedLine } from "src/components/AnimatedLine";
 import { ObservableRect } from "src/components/ObservableRect";
 import { ObserverRect } from "src/components/ObserverRect";
 
+const LINE_CONFIG = {
+  y1: 250,
+  y2: 50,
+};
+
 export const SubscribeDemo = () => {
   const [toggle, setToggle] = useState<boolean | null>(null);
   const props = useSpring({
     from: {
-      y1: 250,
-      y2: toggle ? 50 : 250,
+      y1: LINE_CONFIG.y1,
+      y2: toggle ? LINE_CONFIG.y2 : LINE_CONFIG.y1,
     },
     to: {
-      y1: 250,
-      y2: toggle ? 50 : 250,
+      y1: LINE_CONFIG.y1,
+      y2: toggle ? LINE_CONFIG.y2 : LINE_CONFIG.y1,
     },
   });
 
@@ -31,25 +36,14 @@ export const SubscribeDemo = () => {
           }}
           css={{ color: COLORS.BLUE }}
         >
-          {toggle ? "取消订阅 unsubscribe" : "订阅 subscribe"}
+          {toggle ? "退订 unsubscribe" : "订阅 subscribe"}
         </Button>
       </DemoHeader>
       <div css={{ width: 200 }}>
         <svg width={"100%"} height={"100%"} viewBox={"0 0 200 300"}>
           <AnimatedLine style={props} stroke={COLORS.GREEN} />
           <ObservableRect />
-          <ObserverRect>
-            <text
-              x={100}
-              y={293}
-              css={{ fontSize: "1.4rem", cursor: "pointer" }}
-              textAnchor={"middle"}
-              onClick={() => setToggle(!toggle)}
-              fill={COLORS.BLUE}
-            >
-              {toggle ? "取消订阅 unsubscribe" : "订阅 subscribe"}
-            </text>
-          </ObserverRect>
+          <ObserverRect />
         </svg>
       </div>
       <DemoFooter>
