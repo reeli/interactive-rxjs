@@ -10,33 +10,31 @@ import { fromEvent } from "rxjs";
 import { Circle } from "src/components/Circle";
 import { Spring } from "react-spring/renderprops-universal";
 import { isEmpty, map } from "lodash";
-
-const LINE_CONFIG = {
-  LINE1: {
-    x1: 100,
-    x2: 100,
-    y1: 0,
-    y2: 250,
-  },
-};
+import { Link } from "src/components/Link";
+import { LINE_CONFIG } from "src/constants";
 
 const codePieces = `
-import { of } from "rxjs";
-import { map } from "rxjs/operators";
+import { fromEvent } from "rxjs";
+import React, { useEffect, useRef } from "react";
 
-const data = ["A", "B", "C"];
-const source$ = of(1, 2, 3).pipe(map((_, idx) => data[idx]));
+export const Demo = () => {
+  const btnRef = useRef<HTMLButtonElement | null>(null);
+  const counterRef = useRef(0);
 
-const observer = {
-  next: (val) => console.log(val),
-  complete: () => console.log("complete!"),
-  error: () => console.log("error!"),
+  useEffect(() => {
+    if (btnRef.current) {
+      fromEvent(btnRef.current, "click").subscribe(() => {
+        counterRef.current = counterRef.current + 1;
+        console.log(counterRef.current);
+      });
+    }
+  }, []);
+
+  return <button ref={btnRef}>产生事件（持续点击试试？）</button>;
 };
-
-source$.subscribe(observer);
 `;
 
-export const FromEventDemo = () => {
+export const FromEventDemo: React.FC = () => {
   const btnRef = useRef<HTMLButtonElement | null>(null);
   const [data, setData] = useState<any[]>([]);
   const counterRef = useRef(0);
@@ -52,17 +50,20 @@ export const FromEventDemo = () => {
 
   return (
     <>
-      <DemoTitle>fromEvent</DemoTitle>
+      <DemoTitle>
+        <Link id={"fromEvent"} href={"#fromEvent"} variant={"title"}>
+          fromEvent
+        </Link>
+      </DemoTitle>
       <DemoHeader>
         <Button css={{ color: COLORS.BLUE }} ref={btnRef}>
           产生事件（持续点击试试？）
         </Button>
-        <Button css={{ marginLeft: 5 }}>重置动画</Button>
       </DemoHeader>
       <div css={{ display: "flex" }}>
         <div css={{ width: 200 }}>
           <svg width={"100%"} height={"100%"} viewBox={"0 0 200 300"}>
-            <AnimatedLine {...LINE_CONFIG.LINE1} stroke={COLORS.GREEN} />
+            <AnimatedLine {...LINE_CONFIG} stroke={COLORS.GREEN} />
             {isEmpty(data)
               ? null
               : map(data, (_, i: number) => (

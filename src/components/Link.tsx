@@ -22,6 +22,9 @@ const styles = {
     fontSize: "2rem",
     fontWeight: "bold",
   },
+  title:{
+    fontSize:"1.8rem",
+  },
   body1: {
     fontSize: "1.6rem",
   },
@@ -31,7 +34,7 @@ const styles = {
 };
 
 interface ILinkProps extends AnchorHTMLAttributes<any> {
-  variant?: "h2" | "h3" | "body1" | "body2";
+  variant?: "h2" | "h3" | "body1" | "body2" | "title";
 }
 
 export const Link: React.FC<ILinkProps> = ({ children, variant = "body2", ...otherProps }) => (

@@ -9,6 +9,7 @@ import { Highlight } from "src/components/Highlight";
 import { Circle } from "src/components/Circle";
 import { Spring } from "react-spring/renderprops-universal";
 import { map } from "lodash";
+import { Link } from "src/components/Link";
 
 const LINE_CONFIG = {
   LINE1: {
@@ -42,7 +43,11 @@ export const TimerDemo = () => {
   const [started, setStarted] = useState(false);
   return (
     <>
-      <DemoTitle>timer</DemoTitle>
+      <DemoTitle>
+        <Link id={"timer"} href={"#timer"} variant={"title"}>
+          timer
+        </Link>
+      </DemoTitle>
       <DemoHeader>
         <Button
           css={{ color: COLORS.BLUE }}

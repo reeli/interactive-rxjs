@@ -9,6 +9,7 @@ import { Highlight } from "src/components/Highlight";
 import { Circle } from "src/components/Circle";
 import { Spring } from "react-spring/renderprops-universal";
 import { map } from "lodash";
+import { Link } from "src/components/Link";
 
 const LINE_CONFIG = {
   LINE1: {
@@ -20,27 +21,33 @@ const LINE_CONFIG = {
 };
 
 const codePieces = `
-import { of } from "rxjs";
-import { map } from "rxjs/operators";
+import { interval } from "rxjs";
+import { take } from "rxjs/operators";
 
-const data = ["A", "B", "C"];
-const source$ = of(1, 2, 3).pipe(map((_, idx) => data[idx]));
-
-const observer = {
-  next: (val) => console.log(val),
-  complete: () => console.log("complete!"),
-  error: () => console.log("error!"),
-};
-
-source$.subscribe(observer);
+interval(1000)
+  .pipe(take(4))
+  .subscribe(value => {
+    console.log(value);
+  });
+  
+// Logs:
+// 0
+// 1
+// 2
+// 3  
 `;
-const data = [0, 1, 2, 3, 4, 5];
+
+const data = [0, 1, 2, 3];
 
 export const IntervalDemo = () => {
   const [started, setStarted] = useState(false);
   return (
     <>
-      <DemoTitle>interval</DemoTitle>
+      <DemoTitle>
+        <Link id={"interval"} href={"#interval"} variant={"title"}>
+          interval
+        </Link>
+      </DemoTitle>
       <DemoHeader>
         <Button
           css={{ color: COLORS.BLUE }}

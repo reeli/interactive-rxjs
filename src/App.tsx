@@ -1,25 +1,25 @@
 import React from "react";
-import { css, Global } from "@emotion/core";
-import { SubscribeDemo } from "src/examples/SubscribeDemo";
-import { CompleteDemo } from "src/examples/CompleteDemo";
-import { ErrorDemo } from "src/examples/ErrorDemo";
-import { ConcatDemo } from "src/examples/ConcatDemo";
-import { FilterDemo } from "src/examples/FilterDemo";
-import { MapDemo } from "src/examples/MapDemo";
-import { Nav } from "src/components/Nav";
-import { Link } from "src/components/Link";
-import { SubjectDemo } from "src/examples/SubjectDemo";
-import { ColdObservableDemo } from "src/examples/ColdObservableDemo";
-import { HotObservableDemo } from "src/examples/HotObservableDemo";
-import { IconGithub } from "src/assets/IconGithub";
-import { COLORS } from "src/style";
-import { MergeDemo } from "./examples/MergeDemo";
-import { PartitionDemo } from "src/examples/PartitionDemo";
-import { FromEventDemo } from "src/examples/FromEventDemo";
-import { IntervalDemo } from "src/examples/IntervalDemo";
-import { TimerDemo } from "src/examples/TimerDemo";
-import { RaceDemo } from "src/examples/RaceDemo";
-import { ForkJoinDemo } from "src/examples/ForkJoinDemo";
+import {css, Global} from "@emotion/core";
+import {SubscribeDemo} from "src/examples/SubscribeDemo";
+import {CompleteDemo} from "src/examples/CompleteDemo";
+import {ErrorDemo} from "src/examples/ErrorDemo";
+import {ConcatDemo} from "src/examples/ConcatDemo";
+import {FilterDemo} from "src/examples/FilterDemo";
+import {MapDemo} from "src/examples/MapDemo";
+import {Nav} from "src/components/Nav";
+import {Link} from "src/components/Link";
+import {SubjectDemo} from "src/examples/SubjectDemo";
+import {ColdObservableDemo} from "src/examples/ColdObservableDemo";
+import {HotObservableDemo} from "src/examples/HotObservableDemo";
+import {IconGithub} from "src/assets/IconGithub";
+import {COLORS} from "src/style";
+import {MergeDemo} from "./examples/MergeDemo";
+import {PartitionDemo} from "src/examples/PartitionDemo";
+import {FromEventDemo} from "src/examples/FromEventDemo";
+import {IntervalDemo} from "src/examples/IntervalDemo";
+import {TimerDemo} from "src/examples/TimerDemo";
+import {RaceDemo} from "src/examples/RaceDemo";
+import {ForkJoinDemo} from "src/examples/ForkJoinDemo";
 import {ScanDemo} from "src/examples/ScanDemo";
 
 const asideStyles = css({
@@ -104,7 +104,7 @@ export const App = () => {
             <FilterDemo />
             <MapDemo />
             <PartitionDemo />
-            <ScanDemo/>
+            <ScanDemo />
           </section>
           <section>
             <Link id="multicast" href={"#multicast"} variant={"h2"}>

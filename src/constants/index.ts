@@ -1,4 +1,6 @@
 export const LINE_CONFIG = {
+  x1: 100,
+  x2: 100,
   y1: 250,
   y2: 50,
 };
