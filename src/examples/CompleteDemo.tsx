@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { COLORS } from "src/style";
 import { DemoFooter, DemoHeader, DemoTitle, DemoWrapper } from "src/components/Demo";
-import { Button } from "src/components/Button";
 import { AnimatedCircles } from "src/components/AnimatedCircles";
 import { AnimatedLine } from "src/components/AnimatedLine";
 import { ObservableRect } from "src/components/ObservableRect";
 import { ObserverRect } from "src/components/ObserverRect";
 import { useLineAnimation } from "src/hooks/useLineAnimation";
+import { ControlButtons } from "src/components/ControlButtons";
 
 const data = [1, 2, 3];
 
@@ -21,28 +21,18 @@ export const CompleteDemo = () => {
     <DemoWrapper>
       <DemoTitle>Complete</DemoTitle>
       <DemoHeader>
-        {subscribed ? (
-          <Button
-            onClick={() => {
-              setReset(true);
-              setIsAnimationEnd(false);
-              setSubscribed(false);
-            }}
-            css={{ marginLeft: 5 }}
-          >
-            重置动画
-          </Button>
-        ) : (
-          <Button
-            onClick={() => {
-              setReset(false);
-              setSubscribed(true);
-            }}
-            css={{ color: COLORS.BLUE }}
-          >
-            订阅
-          </Button>
-        )}
+        <ControlButtons
+          isStart={subscribed}
+          onStart={() => {
+            setReset(false);
+            setSubscribed(true);
+          }}
+          onReset={() => {
+            setReset(true);
+            setIsAnimationEnd(false);
+            setSubscribed(false);
+          }}
+        />
       </DemoHeader>
       <div css={{ width: 200 }}>
         <svg width={"100%"} height={"100%"} viewBox={"0 0 200 300"}>

@@ -6,10 +6,10 @@ import { isNull } from "lodash";
 import { AnimatedLine } from "src/components/AnimatedLine";
 import { ObservableRect } from "src/components/ObservableRect";
 import { ObserverRect } from "src/components/ObserverRect";
-import {useLineAnimation} from "src/hooks/useLineAnimation";
+import { useLineAnimation } from "src/hooks/useLineAnimation";
 
 export const SubscribeDemo = () => {
-  const [subscribed, setSubscribed] = useState<boolean | null>(false);
+  const [subscribed, setSubscribed] = useState<boolean | null>(null);
   const lineAnimationStyle = useLineAnimation(subscribed);
 
   return (
@@ -33,7 +33,8 @@ export const SubscribeDemo = () => {
         </svg>
       </div>
       <DemoFooter>
-        {isNull(subscribed) ? null : subscribed ? <div>已订阅，现在可以向观察者推送数据了</div> : <div>已取消订阅</div>}
+        {subscribed && <div>已订阅，现在可以向观察者推送数据了</div>}
+        {!subscribed && !isNull(subscribed) && <div>已取消订阅</div>}
       </DemoFooter>
     </DemoWrapper>
   );

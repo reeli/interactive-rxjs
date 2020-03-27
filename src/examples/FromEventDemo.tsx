@@ -11,7 +11,7 @@ import { Circle } from "src/components/Circle";
 import { Spring } from "react-spring/renderprops-universal";
 import { isEmpty, map } from "lodash";
 import { Link } from "src/components/Link";
-import { LINE_CONFIG } from "src/constants";
+import { LINE_CONFIG_2 } from "src/constants";
 
 const codePieces = `
 import { fromEvent } from "rxjs";
@@ -63,7 +63,7 @@ export const FromEventDemo: React.FC = () => {
       <div css={{ display: "flex" }}>
         <div css={{ width: 200 }}>
           <svg width={"100%"} height={"100%"} viewBox={"0 0 200 300"}>
-            <AnimatedLine {...LINE_CONFIG} stroke={COLORS.GREEN} />
+            <AnimatedLine {...LINE_CONFIG_2} stroke={COLORS.GREEN} />
             {isEmpty(data)
               ? null
               : map(data, (_, i: number) => (
