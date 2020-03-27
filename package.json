@@ -9,6 +9,11 @@
     "build": "webpack --config=webpack.config.ts",
     "watch": "tsc --watch"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsc && pretty-quick --staged"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/reeli/interactive-rxjs.git"
