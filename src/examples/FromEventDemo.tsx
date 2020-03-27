@@ -77,7 +77,9 @@ export const FromEventDemo: React.FC = () => {
         </div>
         <Highlight>{codePieces}</Highlight>
       </div>
-      <DemoFooter />
+      <DemoFooter>
+        <div>根据事件(DOM 事件、Node EventEmitter 事件等)创建一个 Observable</div>
+      </DemoFooter>
     </>
   );
 };

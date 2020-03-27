@@ -6,9 +6,7 @@ export const DemoWrapper: React.FC = ({ children }) => (
 
 export const DemoHeader: React.FC = ({ children }) => <div css={{ height: 50 }}>{children}</div>;
 
-export const DemoFooter: React.FC = ({ children }) => (
-  <div css={{ maxWidth: 200, height: 100, padding: "10px 0" }}>{children}</div>
-);
+export const DemoFooter: React.FC = ({ children }) => <div css={{ maxWidth: 200, height: 100 }}>{children}</div>;
 
 export const DemoTitle: React.FC = ({ children }) => (
   <p

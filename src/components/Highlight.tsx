@@ -12,7 +12,7 @@ export const Highlight: React.FC<{ children: string }> = ({ children }) => {
   }, []);
 
   return (
-    <pre css={{ flex: 1, height: 300, marginLeft: 100 }} ref={preEl}>
+    <pre css={{ flex: 1, height: 300, marginLeft: 100, marginTop: 0, marginBottom: 0 }} ref={preEl}>
       {prettifyCode(children)}
     </pre>
   );

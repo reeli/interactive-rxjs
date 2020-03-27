@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { COLORS } from "src/style";
 import { DemoFooter, DemoHeader, DemoTitle } from "src/components/Demo";
-import { Button } from "src/components/Button";
 import { Rect } from "src/components/Rect";
 import { ObserverRect } from "src/components/ObserverRect";
 import { AnimatedLine } from "src/components/AnimatedLine";
@@ -10,15 +9,8 @@ import { Circle } from "src/components/Circle";
 import { Spring } from "react-spring/renderprops-universal";
 import { map } from "lodash";
 import { Link } from "src/components/Link";
-
-const LINE_CONFIG = {
-  LINE1: {
-    x1: 100,
-    x2: 100,
-    y1: 0,
-    y2: 250,
-  },
-};
+import { ControlButtons } from "src/components/ControlButtons";
+import { LINE_CONFIG_2 } from "src/constants";
 
 const codePieces = `
 import { interval } from "rxjs";
@@ -40,7 +32,9 @@ interval(1000)
 const data = [0, 1, 2, 3];
 
 export const IntervalDemo = () => {
-  const [started, setStarted] = useState(false);
+  const [subscribed, setSubscribed] = useState(false);
+  const [isAnimationEnd, setIsAnimationEnd] = useState(false);
+  const [reset, setReset] = useState(false);
   return (
     <>
       <DemoTitle>
@@ -49,38 +43,51 @@ export const IntervalDemo = () => {
         </Link>
       </DemoTitle>
       <DemoHeader>
-        <Button
-          css={{ color: COLORS.BLUE }}
-          onClick={() => {
-            setStarted(true);
+        <ControlButtons
+          isStart={subscribed}
+          onStart={() => {
+            setReset(false);
+            setSubscribed(true);
           }}
-        >
-          开始动画
-        </Button>
-        <Button css={{ marginLeft: 5 }}>重置动画</Button>
+          onReset={() => {
+            setReset(true);
+            setIsAnimationEnd(false);
+            setSubscribed(false);
+          }}
+        />
       </DemoHeader>
       <div css={{ display: "flex" }}>
         <div css={{ width: 200 }}>
           <svg width={"100%"} height={"100%"} viewBox={"0 0 200 300"}>
-            <AnimatedLine {...LINE_CONFIG.LINE1} stroke={COLORS.GREEN} />
-            {map(data, (_, i: number) => (
-              <Spring
-                from={{ y: 18 }}
-                to={{ y: started ? 275 : 18 }}
-                key={i}
-                config={{ duration: 1000 }}
-                delay={i * 1000}
-              >
-                {styles => <Circle translateY={styles.y} text={i} />}
-              </Spring>
-            ))}
+            <AnimatedLine {...LINE_CONFIG_2} stroke={isAnimationEnd ? COLORS.GREY : COLORS.GREEN} />
+            {reset ? null : (
+              <>
+                {map(data, (_, i: number) => (
+                  <Spring
+                    from={{ y: 18 }}
+                    to={{ y: subscribed ? 275 - (i + 1) * 30 : 18 }}
+                    key={i}
+                    delay={i * 1000}
+                    onRest={() => {
+                      if (subscribed && i === data.length - 1) {
+                        setIsAnimationEnd(true);
+                      }
+                    }}
+                  >
+                    {styles => <Circle translateY={styles.y} text={i} />}
+                  </Spring>
+                ))}
+              </>
+            )}
             <Rect width={200} height={40} y={0} text={"Interval$"} />
             <ObserverRect />
           </svg>
         </div>
         <Highlight>{codePieces}</Highlight>
       </div>
-      <DemoFooter />
+      <DemoFooter>
+        <div>创建一个 Observable，这个 Observable 会在每个指定的时间间隔内，发射一个递增的数字</div>
+      </DemoFooter>
     </>
   );
 };
