@@ -8,6 +8,7 @@ import { line } from "d3-shape";
 import { isNull, map } from "lodash";
 import { Circle } from "src/components/Circle";
 import { Highlight } from "src/components/Highlight";
+import { Link } from "src/components/Link";
 
 const data1 = ["1", "3"];
 const data2 = ["2", "4"];
@@ -132,7 +133,11 @@ export const PartitionDemo = () => {
 
   return (
     <div>
-      <DemoTitle>partition</DemoTitle>
+      <DemoTitle>
+        <Link id={"partition"} href={"#partition"} variant={"title"}>
+          partition
+        </Link>
+      </DemoTitle>
       <DemoHeader>
         <Button
           onClick={() => {

@@ -9,6 +9,7 @@ import { useSprings } from "react-spring";
 import { Highlight } from "src/components/Highlight";
 import { isNull, map } from "lodash";
 import { Circle } from "src/components/Circle";
+import { Link } from "src/components/Link";
 
 const LINE_CONFIG = {
   SUBSCRIBE_LINE: {
@@ -148,7 +149,11 @@ export const MergeDemo = () => {
 
   return (
     <div>
-      <DemoTitle>merge</DemoTitle>
+      <DemoTitle>
+        <Link id={"merge"} href={"#merge"} variant={"title"}>
+          merge
+        </Link>
+      </DemoTitle>
       <DemoHeader>
         <Button
           onClick={() => {

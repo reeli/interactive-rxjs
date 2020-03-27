@@ -8,6 +8,7 @@ import { useSprings } from "react-spring";
 import { DemoFooter, DemoHeader, DemoTitle } from "src/components/Demo";
 import { Button } from "src/components/Button";
 import { Highlight } from "src/components/Highlight";
+import { Link } from "src/components/Link";
 
 const LINE_CONFIG = {
   LINE1: {
@@ -79,7 +80,11 @@ export const SubjectDemo = () => {
 
   return (
     <>
-      <DemoTitle>Subject</DemoTitle>
+      <DemoTitle>
+        <Link id={"subject"} href={"#subject"} variant={"title"}>
+          Subject
+        </Link>
+      </DemoTitle>
       <DemoHeader>
         <Button
           onClick={() => {
@@ -110,8 +115,8 @@ export const SubjectDemo = () => {
               <Circle translateX={style.x} translateY={style.y} key={i} text={() => data[i]} />
             ))}
             <Rect width={100} height={40} x={50} text={"Subject$"} />
-            <Rect width={80} height={40} y={220} text={"ObserverA"} fill={COLORS.SECONDARY}/>
-            <Rect width={80} height={40} x={120} y={220} text={"ObserverB"} fill={COLORS.SECONDARY}/>
+            <Rect width={80} height={40} y={220} text={"ObserverA"} fill={COLORS.SECONDARY} />
+            <Rect width={80} height={40} x={120} y={220} text={"ObserverB"} fill={COLORS.SECONDARY} />
           </svg>
         </div>
         <Highlight>{codeExample}</Highlight>

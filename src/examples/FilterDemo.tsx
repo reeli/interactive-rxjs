@@ -9,6 +9,7 @@ import { Circle } from "src/components/Circle";
 import { map } from "lodash";
 import { Spring } from "react-spring/renderprops-universal";
 import { Highlight } from "src/components/Highlight";
+import { Link } from "src/components/Link";
 
 const LINE_CONFIG = {
   OBSERVER_TO_FILTER: {
@@ -48,7 +49,11 @@ export const FilterDemo = () => {
 
   return (
     <>
-      <DemoTitle>filter</DemoTitle>
+      <DemoTitle>
+        <Link id={"filter"} href={"#filter"} variant={"title"}>
+          filter
+        </Link>
+      </DemoTitle>
       <DemoHeader>
         <Button
           onClick={() => {

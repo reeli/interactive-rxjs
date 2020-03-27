@@ -9,6 +9,7 @@ import { animated, useSpring, useSprings } from "react-spring";
 import { Highlight } from "src/components/Highlight";
 import { isNull, last, map } from "lodash";
 import { Circle } from "src/components/Circle";
+import { Link } from "src/components/Link";
 
 const LINE_CONFIG = {
   SUBSCRIBE_LINE: {
@@ -164,7 +165,11 @@ export const ForkJoinDemo = () => {
 
   return (
     <div>
-      <DemoTitle>forkJoin</DemoTitle>
+      <DemoTitle>
+        <Link id={"forkJoin"} href={"#forkJoin"} variant={"title"}>
+          forkJoin
+        </Link>
+      </DemoTitle>
       <DemoHeader>
         <Button
           onClick={() => {

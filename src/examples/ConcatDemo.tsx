@@ -9,6 +9,7 @@ import { useChain, useSpring } from "react-spring";
 import { Circle } from "src/components/Circle";
 import { isNull } from "lodash";
 import { Highlight } from "src/components/Highlight";
+import { Link } from "src/components/Link";
 
 const LINE_CONFIG = {
   OBSERVER_TO_CONCAT: {
@@ -124,7 +125,11 @@ export const ConcatDemo = () => {
 
   return (
     <div>
-      <DemoTitle>concat</DemoTitle>
+      <DemoTitle>
+        <Link id={"concat"} href={"#concat"} variant={"title"}>
+          concat
+        </Link>
+      </DemoTitle>
       <DemoHeader>
         <Button
           onClick={() => {

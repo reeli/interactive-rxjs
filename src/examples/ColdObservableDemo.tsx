@@ -8,6 +8,7 @@ import { useSprings } from "react-spring";
 import { DemoFooter, DemoHeader, DemoTitle } from "src/components/Demo";
 import { Button } from "src/components/Button";
 import { Highlight } from "src/components/Highlight";
+import { Link } from "src/components/Link";
 
 const LINE_CONFIG = {
   LINE1: {
@@ -102,7 +103,11 @@ export const ColdObservableDemo = () => {
 
   return (
     <>
-      <DemoTitle>Cold Observable</DemoTitle>
+      <DemoTitle>
+        <Link id={"coldObservable"} href={"#coldObservable"} variant={"title"}>
+          Cold Observable
+        </Link>
+      </DemoTitle>
       <DemoHeader>
         <Button
           onClick={() => {
