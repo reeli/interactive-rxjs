@@ -5,12 +5,10 @@ import { Rect } from "src/components/Rect";
 import { ObserverRect } from "src/components/ObserverRect";
 import { AnimatedLine } from "src/components/AnimatedLine";
 import { Highlight } from "src/components/Highlight";
-import { Circle } from "src/components/Circle";
-import { Spring } from "react-spring/renderprops-universal";
-import { map } from "lodash";
 import { Link } from "src/components/Link";
 import { ControlButtons } from "src/components/ControlButtons";
 import { LINE_CONFIG_2 } from "src/constants";
+import { AnimatedCircles } from "src/components/AnimatedCircles";
 
 const codePieces = `
 import { interval } from "rxjs";
@@ -34,7 +32,6 @@ const data = [0, 1, 2, 3];
 export const IntervalDemo = () => {
   const [subscribed, setSubscribed] = useState(false);
   const [isAnimationEnd, setIsAnimationEnd] = useState(false);
-  const [reset, setReset] = useState(false);
   return (
     <>
       <DemoTitle>
@@ -46,11 +43,9 @@ export const IntervalDemo = () => {
         <ControlButtons
           isStart={subscribed}
           onStart={() => {
-            setReset(false);
             setSubscribed(true);
           }}
           onReset={() => {
-            setReset(true);
             setIsAnimationEnd(false);
             setSubscribed(false);
           }}
@@ -60,24 +55,13 @@ export const IntervalDemo = () => {
         <div css={{ width: 200 }}>
           <svg width={"100%"} height={"100%"} viewBox={"0 0 200 300"}>
             <AnimatedLine {...LINE_CONFIG_2} stroke={isAnimationEnd ? COLORS.GREY : COLORS.GREEN} />
-            {reset ? null : (
-              <>
-                {map(data, (_, i: number) => (
-                  <Spring
-                    from={{ y: 18 }}
-                    to={{ y: subscribed ? 275 - (i + 1) * 30 : 18 }}
-                    key={i}
-                    delay={i * 1000}
-                    onRest={() => {
-                      if (subscribed && i === data.length - 1) {
-                        setIsAnimationEnd(true);
-                      }
-                    }}
-                  >
-                    {styles => <Circle translateY={styles.y} text={i} />}
-                  </Spring>
-                ))}
-              </>
+            {subscribed && (
+              <AnimatedCircles
+                data={data}
+                onAnimationEnd={() => {
+                  setIsAnimationEnd(true);
+                }}
+              />
             )}
             <Rect width={200} height={40} y={0} text={"Interval$"} />
             <ObserverRect />
