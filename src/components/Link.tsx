@@ -17,13 +17,14 @@ const styles = {
   h2: {
     fontSize: "2.6rem",
     fontWeight: "bold",
+    marginBottom: "3rem",
   },
   h3: {
     fontSize: "2rem",
     fontWeight: "bold",
   },
-  title:{
-    fontSize:"1.8rem",
+  title: {
+    fontSize: "1.8rem",
   },
   body1: {
     fontSize: "1.6rem",
