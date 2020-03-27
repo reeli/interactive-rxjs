@@ -126,8 +126,8 @@ export const MapDemo = () => {
             {map(springs, (style: any, i) => (
               <Circle translateY={style.y} key={i} text={() => dataRef.current[i]} />
             ))}
-            <Rect width={200} height={40} y={0} text={"Source$"} />
-            <Rect width={200} height={40} y={120} text={"Concat$"} />
+            <Rect y={0} text={"Source$"} />
+            <Rect y={120} text={"Map$"} fill={COLORS.PURPLE} />
             <ObserverRect />
           </svg>
         </div>

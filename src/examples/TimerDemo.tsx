@@ -54,26 +54,27 @@ export const TimerDemo = () => {
         <div css={{ width: 200 }}>
           <svg width={"100%"} height={"100%"} viewBox={"0 0 200 300"}>
             <AnimatedLine {...LINE_CONFIG_2} stroke={isAnimationEnd ? COLORS.GREY : COLORS.GREEN} />
-            {map(data, (_, i: number) => {
-              const y1 = CIRCLE_CONFIG.radius + CIRCLE_CONFIG.strokeWidth;
-              const y2 = CIRCLE_CONFIG.y - (i + 1) * CIRCLE_CONFIG.radius * 2;
+            {subscribed &&
+              map(data, (_, i: number) => {
+                const y1 = CIRCLE_CONFIG.radius + CIRCLE_CONFIG.strokeWidth;
+                const y2 = CIRCLE_CONFIG.y - (i + 1) * CIRCLE_CONFIG.radius * 2;
 
-              return (
-                <Spring
-                  from={{ y: y1 }}
-                  to={{ y: subscribed ? y2 : y1 }}
-                  key={i}
-                  delay={1000 + (i + 1) * 600}
-                  onRest={() => {
-                    if (i === data.length - 1) {
-                      setIsAnimationEnd(true);
-                    }
-                  }}
-                >
-                  {styles => <Circle translateY={styles.y} text={i} />}
-                </Spring>
-              );
-            })}
+                return (
+                  <Spring
+                    from={{ y: y1 }}
+                    to={{ y: subscribed ? y2 : y1 }}
+                    key={i}
+                    delay={1000 + (i + 1) * 600}
+                    onRest={() => {
+                      if (i === data.length - 1) {
+                        setIsAnimationEnd(true);
+                      }
+                    }}
+                  >
+                    {styles => <Circle translateY={styles.y} text={i} />}
+                  </Spring>
+                );
+              })}
             <Rect text={"Timer$"} fill={COLORS.PURPLE} />
             <ObserverRect />
           </svg>

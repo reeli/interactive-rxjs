@@ -126,8 +126,8 @@ export const ScanDemo = () => {
             {map(springs, (style: any, i) => (
               <Circle translateY={style.y} key={i} text={() => dataRef.current[i]} />
             ))}
-            <Rect width={200} height={40} y={0} text={"Source$"} />
-            <Rect width={200} height={40} y={120} text={"Scan$"} />
+            <Rect text={"Source$"} />
+            <Rect y={120} text={"Scan$"} fill={COLORS.PURPLE} />
             <ObserverRect />
           </svg>
         </div>

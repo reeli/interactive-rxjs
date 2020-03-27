@@ -184,9 +184,9 @@ export const MergeDemo = () => {
             <MSource1 started={started} onRest={handleRest1} />
             <AnimatedLine {...LINE_CONFIG.LINE2} stroke={isComplete2 ? COLORS.GREY : COLORS.GREEN} style={styleLine2} />
             <MSource2 started={started} onRest={handleRest2} />
-            <Rect width={80} height={40} text={"SourceA$"} />
-            <Rect width={80} height={40} x={120} text={"SourceB$"} />
-            <Rect width={200} height={40} y={120} text={"Merge$"} />
+            <Rect width={80} text={"SourceA$"} />
+            <Rect width={80} x={120} text={"SourceB$"} />
+            <Rect y={120} text={"Merge$"} fill={COLORS.PURPLE} />
             <ObserverRect />
           </svg>
         </div>

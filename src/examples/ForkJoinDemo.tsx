@@ -200,11 +200,11 @@ export const ForkJoinDemo = () => {
             <AnimatedLine {...LINE_CONFIG.LINE2} stroke={isComplete2 ? COLORS.GREY : COLORS.GREEN} style={styleLine2} />
 
             <CombinedRect style={style} />
-            <Rect width={200} height={80} y={100} text={"ForkJoin$"} textVerticalAlign={"bottom"} />
+            <Rect height={80} y={100} text={"ForkJoin$"} textVerticalAlign={"bottom"} fill={COLORS.PURPLE} />
             <MSource1 started={started} onRest={handleRest1} />
             <MSource2 started={started} onRest={handleRest2} />
-            <Rect width={80} height={40} text={"SourceA$"} />
-            <Rect width={80} height={40} x={120} text={"SourceB$"} />
+            <Rect width={80} text={"SourceA$"} />
+            <Rect width={80} x={120} text={"SourceB$"} />
             <ObserverRect y={300} />
           </svg>
         </div>

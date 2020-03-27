@@ -94,8 +94,8 @@ export const FilterDemo = () => {
                 {styles => <Circle translateY={styles.y} text={i} />}
               </Spring>
             ))}
-            <Rect width={200} height={40} y={0} text={"Source$"} />
-            <Rect width={200} height={40} y={120} text={"Concat$"} />
+            <Rect text={"Source$"} />
+            <Rect y={120} text={"Filter$"} fill={COLORS.PURPLE} />
             <ObserverRect />
           </svg>
         </div>

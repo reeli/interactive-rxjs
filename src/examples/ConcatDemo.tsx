@@ -172,9 +172,9 @@ export const ConcatDemo = () => {
             />
             <Circle text={"1"} translateX={source1CircleStyles.x} translateY={source1CircleStyles.y} />
             <Circle text={"2"} translateX={source2CircleStyles.x} translateY={source2CircleStyles.y} />
-            <Rect width={80} height={40} text={"Source1$"} />
-            <Rect width={80} height={40} x={120} text={"Source2$"} />
-            <Rect width={200} height={40} y={120} text={"Concat$"} />
+            <Rect width={80} text={"Source1$"} />
+            <Rect width={80} x={120} text={"Source2$"} />
+            <Rect y={120} text={"Concat$"} fill={COLORS.PURPLE} />
             <ObserverRect />
           </svg>
         </div>
