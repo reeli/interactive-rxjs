@@ -33,19 +33,19 @@ const getTextPosition = ({
   if (textVerticalAlign === "bottom") {
     return {
       x: x + width / 2,
-      y: y+height * 0.8
+      y: y + height * 0.8,
     };
   }
 
   return {
     x: x + width / 2,
-    y: y - height/2,
+    y: y - height / 2,
   };
 };
 
 export const Rect: React.FC<IRectProps> = ({
   width = 200,
-  height = 50,
+  height = 40,
   x = 0,
   y = 0,
   fill = COLORS.PRIMARY,

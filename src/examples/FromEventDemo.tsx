@@ -11,7 +11,7 @@ import { Circle } from "src/components/Circle";
 import { Spring } from "react-spring/renderprops-universal";
 import { isEmpty, map } from "lodash";
 import { Link } from "src/components/Link";
-import { LINE_CONFIG_2 } from "src/constants";
+import { CIRCLE_CONFIG, LINE_CONFIG_2 } from "src/constants";
 
 const codePieces = `
 import { fromEvent } from "rxjs";
@@ -67,11 +67,16 @@ export const FromEventDemo: React.FC = () => {
             {isEmpty(data)
               ? null
               : map(data, (_, i: number) => (
-                  <Spring from={{ y: 18 }} to={{ y: 275 }} key={i} config={{ duration: 1000 }}>
+                  <Spring
+                    from={{ y: CIRCLE_CONFIG.radius + CIRCLE_CONFIG.strokeWidth }}
+                    to={{ y: CIRCLE_CONFIG.y + CIRCLE_CONFIG.radius + CIRCLE_CONFIG.strokeWidth }}
+                    key={i}
+                    config={{ duration: 1000 }}
+                  >
                     {styles => <Circle translateY={styles.y} text={i} />}
                   </Spring>
                 ))}
-            <Rect width={200} height={40} y={0} text={"FromEvent$"} />
+            <Rect text={"FromEvent$"} fill={COLORS.PURPLE} />
             <ObserverRect />
           </svg>
         </div>

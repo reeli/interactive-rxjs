@@ -1,6 +1,6 @@
 export const LINE_CONFIG = {
   y1: 250,
-  y2: 50,
+  y2: 40,
 };
 
 export const LINE_CONFIG_2 = {
@@ -12,7 +12,7 @@ export const LINE_CONFIG_2 = {
 
 export const RECT_CONFIG = {
   width: 200,
-  height: 50,
+  height: 40,
   x: 0,
   y: 0,
 };

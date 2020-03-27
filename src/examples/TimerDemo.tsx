@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { COLORS } from "src/style";
 import { DemoFooter, DemoHeader, DemoTitle } from "src/components/Demo";
-import { Button } from "src/components/Button";
 import { Rect } from "src/components/Rect";
 import { ObserverRect } from "src/components/ObserverRect";
 import { AnimatedLine } from "src/components/AnimatedLine";
@@ -10,37 +9,28 @@ import { Circle } from "src/components/Circle";
 import { Spring } from "react-spring/renderprops-universal";
 import { map } from "lodash";
 import { Link } from "src/components/Link";
-
-const LINE_CONFIG = {
-  LINE1: {
-    x1: 100,
-    x2: 100,
-    y1: 0,
-    y2: 250,
-  },
-};
+import { CIRCLE_CONFIG, LINE_CONFIG_2 } from "src/constants";
+import { ControlButtons } from "src/components/ControlButtons";
 
 const codePieces = `
-// timer 和 interval 类似，不过 timer 可以指定什么时候开始发送数据。
+// 2000 毫秒之后，每隔 1000 毫秒，发射一个递增的数字
 
-import { of } from "rxjs";
-import { map } from "rxjs/operators";
+const numbers = timer(2000, 1000).pipe(take(4));
+numbers.subscribe(x => console.log(x));
 
-const data = ["A", "B", "C"];
-const source$ = of(1, 2, 3).pipe(map((_, idx) => data[idx]));
-
-const observer = {
-  next: (val) => console.log(val),
-  complete: () => console.log("complete!"),
-  error: () => console.log("error!"),
-};
-
-source$.subscribe(observer);
+// Logs:
+// 0
+// 1
+// 2
+// 3  
 `;
-const data = [0, 1, 2, 3, 4, 5];
+
+const data = [0, 1, 2, 3];
 
 export const TimerDemo = () => {
-  const [started, setStarted] = useState(false);
+  const [subscribed, setSubscribed] = useState(false);
+  const [isAnimationEnd, setIsAnimationEnd] = useState(false);
+
   return (
     <>
       <DemoTitle>
@@ -49,43 +39,49 @@ export const TimerDemo = () => {
         </Link>
       </DemoTitle>
       <DemoHeader>
-        <Button
-          css={{ color: COLORS.BLUE }}
-          onClick={() => {
-            setStarted(true);
+        <ControlButtons
+          isStart={subscribed}
+          onStart={() => {
+            setSubscribed(true);
           }}
-        >
-          开始动画
-        </Button>
-        <Button css={{ marginLeft: 5 }}>重置动画</Button>
+          onReset={() => {
+            setIsAnimationEnd(false);
+            setSubscribed(false);
+          }}
+        />
       </DemoHeader>
       <div css={{ display: "flex" }}>
         <div css={{ width: 200 }}>
           <svg width={"100%"} height={"100%"} viewBox={"0 0 200 300"}>
-            <AnimatedLine {...LINE_CONFIG.LINE1} stroke={COLORS.GREEN} />
-            {map(data, (_, i: number) => (
-              <Spring
-                from={{ y: 18 }}
-                to={{ y: started ? 275 : 18 }}
-                key={i}
-                config={{ duration: 1000 }}
-                delay={2000 + i * 1000}
-              >
-                {styles => <Circle translateY={styles.y} text={i} />}
-              </Spring>
-            ))}
-            <Rect width={200} height={40} y={0} text={"Timer$"} />
+            <AnimatedLine {...LINE_CONFIG_2} stroke={isAnimationEnd ? COLORS.GREY : COLORS.GREEN} />
+            {map(data, (_, i: number) => {
+              const y1 = CIRCLE_CONFIG.radius + CIRCLE_CONFIG.strokeWidth;
+              const y2 = CIRCLE_CONFIG.y - (i + 1) * CIRCLE_CONFIG.radius * 2;
+
+              return (
+                <Spring
+                  from={{ y: y1 }}
+                  to={{ y: subscribed ? y2 : y1 }}
+                  key={i}
+                  delay={1000 + (i + 1) * 600}
+                  onRest={() => {
+                    if (i === data.length - 1) {
+                      setIsAnimationEnd(true);
+                    }
+                  }}
+                >
+                  {styles => <Circle translateY={styles.y} text={i} />}
+                </Spring>
+              );
+            })}
+            <Rect text={"Timer$"} fill={COLORS.PURPLE} />
             <ObserverRect />
           </svg>
         </div>
         <Highlight>{codePieces}</Highlight>
       </div>
       <DemoFooter>
-        {started && (
-          <div>
-            <p>延迟 2000 毫秒后才开始发射数据。</p>
-          </div>
-        )}
+        <div>和 interval 类似，不过 timer 可以指定什么时候开始发送数据</div>
       </DemoFooter>
     </>
   );

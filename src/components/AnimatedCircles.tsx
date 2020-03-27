@@ -16,7 +16,7 @@ export const AnimatedCircles: React.FC<{
         <Spring
           from={{ y: y1 }}
           to={{ y: y2 }}
-          delay={(i + 1) * 1000}
+          delay={(i + 1) * 600}
           key={i}
           onRest={() => {
             if (i === data.length - 1) {

@@ -63,7 +63,7 @@ export const IntervalDemo = () => {
                 }}
               />
             )}
-            <Rect width={200} height={40} y={0} text={"Interval$"} />
+            <Rect text={"Interval$"} fill={COLORS.PURPLE} />
             <ObserverRect />
           </svg>
         </div>
