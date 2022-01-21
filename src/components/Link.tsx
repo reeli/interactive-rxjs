@@ -1,5 +1,5 @@
 import React, { AnchorHTMLAttributes } from "react";
-import { css } from "@emotion/core";
+import { css } from "@emotion/react";
 import { COLORS } from "src/style";
 
 const linkStyles = css({

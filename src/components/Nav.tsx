@@ -1,7 +1,6 @@
-import React from "react";
 import { map } from "lodash";
 import { Link } from "src/components/Link";
-import { css } from "@emotion/core";
+import { css } from "@emotion/react";
 import { COLORS } from "src/style";
 
 const ROUTES = [
@@ -183,7 +182,7 @@ export const Nav = () => (
       title={"github"}
       css={{ marginTop: 100, marginRight: 100, textDecoration: "underline" }}
     >
-      访问 Github >>
+      访问 Github
     </Link>
   </>
 );

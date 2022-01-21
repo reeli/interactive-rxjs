@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import  { useEffect, useRef, useState } from "react";
 import { COLORS } from "src/style";
 import { DemoFooter, DemoHeader, DemoTitle } from "src/components/Demo";
 import { Button } from "src/components/Button";

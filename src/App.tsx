@@ -1,5 +1,4 @@
-import React from "react";
-import { css, Global } from "@emotion/core";
+import { css, Global } from "@emotion/react";
 import { SubscribeDemo } from "src/examples/SubscribeDemo";
 import { CompleteDemo } from "src/examples/CompleteDemo";
 import { ErrorDemo } from "src/examples/ErrorDemo";

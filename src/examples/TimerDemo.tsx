@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { COLORS } from "src/style";
 import { DemoFooter, DemoHeader, DemoTitle } from "src/components/Demo";
 import { Rect } from "src/components/Rect";

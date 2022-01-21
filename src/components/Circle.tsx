@@ -1,7 +1,7 @@
 import {COLORS} from "src/style";
-import React from "react";
 import {animated} from "react-spring";
 import {isFunction} from "lodash";
+import {FC} from "react";
 
 const CIRCLE_CONFIG = {
     radius: 15,
@@ -23,7 +23,7 @@ interface ICircleProps {
     stroke?: string;
 }
 
-export const Circle: React.FC<ICircleProps> = animated(
+export const Circle: FC<ICircleProps> = animated(
     ({
          r = CIRCLE_CONFIG.radius,
          fill = CIRCLE_CONFIG.fill,
