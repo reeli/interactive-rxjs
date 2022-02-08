@@ -38,7 +38,6 @@ const webpackConfig: webpack.Configuration = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: "React UI Components",
       template: "./index.html",
     }),
   ],
