@@ -8,3 +8,6 @@ build:
 
 watch:
 	tsc --watch
+
+deploy-gh-pages:
+	pnpx gh-pages -d public
