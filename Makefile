@@ -3,7 +3,7 @@ dev:
 
 build:
 	NODE_ENV=production webpack --config=webpack.config.ts
-	ts-node scripts/index.ts
+	npx ts-node scripts/index.ts
 
 watch:
 	tsc --watch
