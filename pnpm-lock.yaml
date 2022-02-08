@@ -11,6 +11,7 @@ specifiers:
   '@babel/preset-react': ^7.16.7
   '@babel/preset-typescript': ^7.16.7
   '@babel/runtime': ^7.16.7
+  '@emotion/babel-plugin': ^11.7.2
   '@emotion/babel-preset-css-prop': 11.2.0
   '@emotion/react': ^11.1.4
   '@material-ui/core': 4.9.4
@@ -84,6 +85,7 @@ devDependencies:
   '@babel/preset-react': 7.16.7_@babel+core@7.16.10
   '@babel/preset-typescript': 7.16.7_@babel+core@7.16.10
   '@babel/runtime': 7.16.7
+  '@emotion/babel-plugin': 11.7.2_@babel+core@7.16.10
   '@emotion/babel-preset-css-prop': 11.2.0_@babel+core@7.16.10
   '@material-ui/core': 4.9.4_b3482aaf5744fc7c2aeb7941b0e0a78f
   '@material-ui/icons': 4.11.2_a62c9277d41c2de3f8f7cc147ac283c6
